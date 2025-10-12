@@ -1,0 +1,46 @@
+# --- Code::Blocks ---
+*.depend
+*.layout
+# Directorios de build por defecto
+/bin/
+/obj/
+/bin/**/
+/obj/**/
+Debug/
+/Release/
+
+# --- Compilados / intermedios ---
+*.o
+*.obj
+*.gch
+*.pch
+*.ilk
+*.pdb
+*.lst
+*.map
+*.d
+*.out
+*.log
+
+# --- Ejecutables / libs ---
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.la
+*.lib
+
+# --- Archivos del sistema operativo ---
+# macOS
+.DS_Store
+.AppleDouble
+._*
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# --- Otros IDEs (por si alguien abre el repo con otro editor) ---
+.vscode/
+.idea/
