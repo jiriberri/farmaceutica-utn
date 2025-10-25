@@ -22,6 +22,7 @@ void ClientesManager::alta(){
 
     cout << "ID de Obra Social: ";
     cin >> ob;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     cout << "Domicilio: ";
     cin.getline(dom, sizeof(dom));
@@ -37,14 +38,15 @@ void ClientesManager::alta(){
 
 
     //momentaneo para ver que la carga se haya hecho bien
-    cout << c.getCuil() << endl;
-    cout << c.getNombre() << endl;
-    cout << c.getApellido() << endl;
-    cout << c.getIdObraSocial() << endl;
-    cout << c.getDomicilio() << endl;
-    cout << c.getMail() << endl;
-    cout << c.getTelefono() << endl;
-    cout << c.getEliminado() << endl;
+    cout << endl << "--- Datos cargados ---" << endl;
+    cout << "CUIL: " << c.getCuil() << endl;
+    cout << "Nombre: " << c.getNombre() << endl;
+    cout << "Apellido: " << c.getApellido() << endl;
+    cout << "Obra Social: " << c.getIdObraSocial() << endl;
+    cout << "Domicilio: " << c.getDomicilio() << endl;
+    cout << "Mail: " << c.getMail() << endl;
+    cout << "Teléfono: " << c.getTelefono() << endl;
+    cout << "Eliminado: " << (c.getEliminado() ? "Sí" : "No") << endl;
 
     system("pause");
 }

@@ -37,10 +37,12 @@
 		<Unit filename="include/Cliente.h" />
 		<Unit filename="include/ClientesManager.h" />
 		<Unit filename="include/Menu.h" />
+		<Unit filename="include/Persona.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Cliente.cpp" />
 		<Unit filename="src/ClientesManager.cpp" />
 		<Unit filename="src/Menu.cpp" />
+		<Unit filename="src/Persona.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
