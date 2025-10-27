@@ -1,9 +1,16 @@
-#include "ClientesManager.h"
-#include "Cliente.h"
 #include <iostream>
 #include <limits>
-
+#include "ClientesManager.h"
+#include "Cliente.h"
+#include "ArchivoClientes.h"
 using namespace std;
+
+
+
+
+
+
+
 
 void ClientesManager::alta(){
     int cuil, ob;
@@ -37,8 +44,34 @@ void ClientesManager::alta(){
     Cliente c(cuil, nom, ape, ob, dom, mail, tel, false);
 
 
-    //momentaneo para ver que la carga se haya hecho bien
-    cout << endl << "--- Datos cargados ---" << endl;
+
+   ///Esta es la funcion de la clase ArchivoClientes
+    ArchivoClientes archi("clientes.dat");
+
+    if(archi.guardarCliente(c)){
+        cout<<"Cliente guardado exitosamente"<<endl;
+
+    }else{
+       cout<<"Error al guardar el cliente"<<endl;
+
+    }
+
+    system("pause");
+}
+
+
+
+
+
+void ClientesManager::mostrar(){
+
+ArchivoClientes archi("clientes.dat");
+
+int cantreg= archi.cantidadRegistros();
+
+for(int i =0; i< cantreg;i++){
+ Cliente c =archi.leerClientes(i);
+
     cout << "CUIL: " << c.getCuil() << endl;
     cout << "Nombre: " << c.getNombre() << endl;
     cout << "Apellido: " << c.getApellido() << endl;
@@ -47,6 +80,44 @@ void ClientesManager::alta(){
     cout << "Mail: " << c.getMail() << endl;
     cout << "Teléfono: " << c.getTelefono() << endl;
     cout << "Eliminado: " << (c.getEliminado() ? "Sí" : "No") << endl;
+    cout<< "=============================================="<<endl;
 
-    system("pause");
 }
+system("pause");
+}
+
+
+void ClientesManager::mostrarxCUIL(){
+
+
+ int cuilBuscado;
+    std::cout << "Ingrese el CUIL del cliente a buscar: ";
+    std::cin >> cuilBuscado;
+
+    ArchivoClientes archi("clientes.dat");
+    int pos = archi.buscarPorCUIL(cuilBuscado);
+
+    if (pos != -1) {
+        Cliente c = archi.leerClientes(pos);  // leer cliente encontrado
+
+        std::cout << "\n--- Cliente encontrado ---\n";
+        std::cout << "CUIL: " << c.getCuil() << std::endl;
+        std::cout << "Nombre: " << c.getNombre() << std::endl;
+        std::cout << "Apellido: " << c.getApellido() << std::endl;
+        std::cout << "Obra Social: " << c.getIdObraSocial() << std::endl;
+        std::cout << "Domicilio: " << c.getDomicilio() << std::endl;
+        std::cout << "Mail: " << c.getMail() << std::endl;
+        std::cout << "Telefono: " << c.getTelefono() << std::endl;
+        std::cout << "Eliminado: " << (c.getEliminado() ? "Sí" : "No") << std::endl;
+        std::cout << "==============================" << std::endl;
+    } else {
+        std::cout << "Cliente no encontrado." << std::endl;
+    }
+
+    system("pause");  // pausa para que el usuario vea el resultado
+}
+
+
+
+
+

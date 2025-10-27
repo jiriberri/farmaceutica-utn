@@ -34,11 +34,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/ArchivoClientes.h" />
 		<Unit filename="include/Cliente.h" />
 		<Unit filename="include/ClientesManager.h" />
 		<Unit filename="include/Menu.h" />
 		<Unit filename="include/Persona.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/ArchivoClientes.cpp" />
 		<Unit filename="src/Cliente.cpp" />
 		<Unit filename="src/ClientesManager.cpp" />
 		<Unit filename="src/Menu.cpp" />

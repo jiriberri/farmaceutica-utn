@@ -8,6 +8,8 @@ class ClientesManager
 
     public:
         void alta();
+        void mostrar();
+        void mostrarxCUIL();
 
 };
 
