@@ -3,7 +3,8 @@
 
 #include "Persona.h"
 
-class Cliente : public Persona {
+class Cliente : public Persona
+{
 private:
     int _cuil;
     int _idObraSocial;

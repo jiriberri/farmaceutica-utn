@@ -3,23 +3,24 @@
 #include "Cliente.h"
 
 
-class ArchivoClientes {
+class ArchivoClientes
+{
 private:
 
-std::string _nombreArchivo;
+    std::string _nombreArchivo;
 
 
 public:
 
-ArchivoClientes(std::string nombreArchivo);
+    ArchivoClientes(std::string nombreArchivo);
 
-bool guardarCliente(Cliente reg);
+    bool guardarCliente(Cliente reg);
 
-int cantidadRegistros();
+    int cantidadRegistros();
 
-Cliente leerClientes(int pos);
+    Cliente leerClientes(int pos);
 
-int buscarPorCUIL(int cuilSolicitado);
+    int buscarPorCUIL(int cuilSolicitado);
 
 };
 

@@ -4,11 +4,11 @@
 
 class Menu
 {
-    public:
-        void menuPrincipal();
-        void menuClientes();
+public:
+    void menuPrincipal();
+    void menuClientes();
 
-    private:
+private:
 };
 
 #endif // MENU_H

@@ -4,12 +4,12 @@
 
 class ClientesManager
 {
-    private:
+private:
 
-    public:
-        void alta();
-        void mostrar();
-        void mostrarxCUIL();
+public:
+    void alta();
+    void mostrar();
+    void mostrarxCUIL();
 
 };
 
