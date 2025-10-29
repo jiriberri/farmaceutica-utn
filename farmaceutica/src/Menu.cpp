@@ -38,7 +38,6 @@ void Menu::menuPrincipal()
         }
     }
     while(opcion != 0);
-
 }
 
 void Menu::menuClientes()
@@ -52,7 +51,7 @@ void Menu::menuClientes()
         cout << "--- Menu Clientes ---" << endl;
 
         cout << "1. Cargar cliente" << endl;
-        cout << "2. Mostrar lista completa Clientes"<< endl;
+        cout << "2. Listar Clientes"<< endl;
         cout << "3. Buscar Cliente por CUIL"<<endl;
         cout << "0. Atras" << endl;
         cout << "Seleccione una opcion: ";

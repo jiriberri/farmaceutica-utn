@@ -19,7 +19,6 @@ bool ArchivoClientes::guardarCliente(Cliente reg)
 
     fwrite(&reg, sizeof(Cliente), 1, p); // escribe el cliente
     fclose(p);
-    cout<<"El archivo se guardo exitosamente"<<endl;
 
     return true;
 }
@@ -34,9 +33,9 @@ int ArchivoClientes::cantidadRegistros()
         cout<<"Error, archivo no encontrado"<<endl;
     }
 
-    fseek(p,0,SEEK_END); ///va al final del archivo
+    fseek(p,0,SEEK_END); // va al final del archivo
 
-    int cantidad= ftell(p)/sizeof(Cliente); ///Posicion actual / tamaño Cliente
+    int cantidad= ftell(p)/sizeof(Cliente); // Posicion actual / tamaño Cliente
 
     return cantidad;
 }
