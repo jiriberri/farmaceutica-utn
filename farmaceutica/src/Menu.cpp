@@ -53,17 +53,18 @@ void Menu::menuClientes()
 
         cout << "1. Cargar cliente" << endl;
         cout << "2. Mostrar lista completa Clientes"<< endl;
-        cout << "3. Busca Cliente por CUIL"<<endl;
+        cout << "3. Buscar Cliente por CUIL"<<endl;
         cout << "0. Atras" << endl;
         cout << "Seleccione una opcion: ";
         cin >> opcion;
         cout << endl;
 
+        ClientesManager mgr;
+
         switch (opcion)
         {
         case 1:
             limpiarPantalla();
-            ClientesManager mgr;
             mgr.alta();
             break;
         case 2:
