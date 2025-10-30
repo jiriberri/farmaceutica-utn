@@ -78,5 +78,13 @@ int ArchivoClientes::buscarPorCUIL(int cuilBuscado)
     return -1;  // no se encontró
 }
 
+bool ArchivoClientes::existe() const {
+    FILE* p = fopen(_nombreArchivo.c_str(), "rb");
 
+    if (p == NULL) return false;
+
+    fclose(p);
+
+    return true;
+}
 

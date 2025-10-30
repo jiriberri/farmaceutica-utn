@@ -15,9 +15,11 @@ void ClientesManager::alta()
     cout << "CUIL: ";
     cin >> cuil;
 
-    if (arch.buscarPorCUIL(cuil) != -1)
+    if (arch.existe() && arch.buscarPorCUIL(cuil) != -1)
     {
         cout << endl << "EL CUIL ingresado ya esta agregado" << endl;
+        system("pause");
+        return;
     }
     else
     {
@@ -62,6 +64,12 @@ void ClientesManager::alta()
 void ClientesManager::mostrar()
 {
     ArchivoClientes archi("clientes.dat");
+
+    if (!archi.existe()) {
+        cout << "No hay clientes para mostrar." << endl;
+        system("pause");
+        return;
+    }
 
     int cantReg= archi.cantidadRegistros();
 

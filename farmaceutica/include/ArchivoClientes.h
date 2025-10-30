@@ -22,6 +22,7 @@ public:
 
     int buscarPorCUIL(int cuilSolicitado);
 
+    bool existe() const;
 };
 
 

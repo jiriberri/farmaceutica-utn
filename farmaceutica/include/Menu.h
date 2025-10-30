@@ -7,6 +7,7 @@ class Menu
 public:
     void menuPrincipal();
     void menuClientes();
+    void menuOS();
 
 private:
 };
