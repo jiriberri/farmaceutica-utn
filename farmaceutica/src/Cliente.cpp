@@ -1,6 +1,6 @@
 #include "Cliente.h"
 
-Cliente::Cliente(int c, const char* n, const char* a,
+Cliente::Cliente(long long c, const char* n, const char* a,
                  int o, const char* d, const char* m,
                  const char* t, bool e)
     : Persona(n, a, d, m, t)
@@ -10,7 +10,7 @@ Cliente::Cliente(int c, const char* n, const char* a,
     _eliminado = e;
 }
 
-int Cliente::getCuil() const
+long long Cliente::getCuil() const
 {
     return _cuil;
 }
@@ -23,7 +23,7 @@ bool Cliente::getEliminado() const
     return _eliminado;
 }
 
-void Cliente::setCuil(int c)
+void Cliente::setCuil(long long c)
 {
     _cuil = c;
 }

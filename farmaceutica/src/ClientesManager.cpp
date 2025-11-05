@@ -9,7 +9,8 @@ using namespace std;
 
 void ClientesManager::alta()
 {
-    int cuil, ob;
+    long long cuil;
+    int ob;
     char nom[20] {}, ape[20] {}, dom[50], mail[30], tel[12];
     ArchivoClientes arch("clientes.dat");
 
@@ -122,7 +123,7 @@ void ClientesManager::mostrar()
 
 void ClientesManager::mostrarxCUIL()
 {
-    int cuilBuscado;
+    long long cuilBuscado;
     cout << "Ingrese el CUIL del cliente a buscar: ";
     cin >> cuilBuscado;
 
@@ -153,36 +154,38 @@ void ClientesManager::mostrarxCUIL()
     system("pause");
 }
 
-void ClientesManager::modificar(){
-int cuilBuscado;
-cout<<"Ingrese el Cuil del cliente que quiera modificar: "<<endl;
-cin>> cuilBuscado;
+void ClientesManager::modificar()
+{
+    long long cuilBuscado;
+    cout<<"Ingrese el Cuil del cliente que quiera modificar: ";
+    cin>> cuilBuscado;
 
-ArchivoClientes archi("clientes.dat");
+    ArchivoClientes archi("clientes.dat");
 
-int pos=archi.buscarPorCUIL(cuilBuscado);
+    int pos=archi.buscarPorCUIL(cuilBuscado);
 
-if(pos<0){
+    if(pos<0)
+    {
+        cout << "Cliente no encontrado." << endl;
+        system("pause");
+        return;
+    }
 
-    cout << "Cliente no encontrado." << endl;
-      return;
+    Cliente c;
+    c=archi.leerClientes(pos);
 
-}
-Cliente c;
-c=archi.leerClientes(pos);
-
-int opcion;
-        cout << "\n--- Cliente encontrado ---\n";
-        cout<<"-----------------------------------------------"<<endl;
-        cout << "CUIL: " << c.getCuil() << endl;
-        cout << "Nombre: " << c.getNombre() << endl;
-        cout << "Apellido: " << c.getApellido() << endl;
-        cout << "Obra Social: " << c.getIdObraSocial() << endl;
-        cout << "Domicilio: " << c.getDomicilio() << endl;
-        cout << "Mail: " << c.getMail() << endl;
-        cout << "Telefono: " << c.getTelefono() << endl;
-        cout << "Eliminado: " << (c.getEliminado() ? "Sí" : "No") << endl;
-        cout << "---------------------------------------------" << endl;
+    int opcion;
+    cout << "\n--- Cliente encontrado ---\n";
+    cout<<"-----------------------------------------------"<<endl;
+    cout << "CUIL: " << c.getCuil() << endl;
+    cout << "Nombre: " << c.getNombre() << endl;
+    cout << "Apellido: " << c.getApellido() << endl;
+    cout << "Obra Social: " << c.getIdObraSocial() << endl;
+    cout << "Domicilio: " << c.getDomicilio() << endl;
+    cout << "Mail: " << c.getMail() << endl;
+    cout << "Telefono: " << c.getTelefono() << endl;
+    cout << "Eliminado: " << (c.getEliminado() ? "Sí" : "No") << endl;
+    cout << "---------------------------------------------" << endl;
 
 
 
@@ -192,88 +195,84 @@ int opcion;
     cout << "3. Modificar telefono"<<endl;
     cout<<  "4. Modificar ID Obra Social"<<endl;
     cout << "0. Cancelar"<<endl;
-    cout << "Seleccione una opcion: "<<endl;
+    cout << "Seleccione una opcion: ";
     cin >> opcion;
+    cout << endl;
 
 
-switch(opcion){
+    switch(opcion)
+    {
 
-case 1:{ char nuevoDomicilio[50];
-         cout<<"Ingrese nuevo Domicilio"<<endl;
-         cin>>nuevoDomicilio;
-         c.setDomicilio(nuevoDomicilio);
-         break;
-}
+    case 1:
+    {
+        char nuevoDomicilio[50];
+        cout<<"Ingrese nuevo Domicilio: ";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.getline(nuevoDomicilio, sizeof(nuevoDomicilio));
+        c.setDomicilio(nuevoDomicilio);
+        break;
+    }
 
-case 2:{
-      char nuevoMail[30];
-      cout<<"Ingrese nuevo mail: "<<endl;
-      cin>>nuevoMail;
-      c.setMail(nuevoMail);
-      break;
-}
-case 3: {
-            char nuevoTelefono[12];
-            cout << "Ingrese nuevo teléfono: "<<endl;
-            cin>>nuevoTelefono;
-            c.setTelefono(nuevoTelefono);
-            break;
+    case 2:
+    {
+        char nuevoMail[30];
+        cout<<"Ingrese nuevo mail: ";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.getline(nuevoMail, sizeof(nuevoMail));
+        c.setMail(nuevoMail);
+        break;
+    }
+    case 3:
+    {
+        char nuevoTelefono[12];
+        cout << "Ingrese nuevo teléfono: ";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.getline(nuevoTelefono, sizeof(nuevoTelefono));
+        c.setTelefono(nuevoTelefono);
+        break;
 
-}
+    }
+    case 4:
+    {
+        int nuevoIdObra;
+        cout << "Ingrese el nuevo ID de la obra social: ";
+        cin >> nuevoIdObra;
 
- case 4:{
-            int nuevoIdObra;
-            cout << "Ingrese el nuevo ID de la obra social: ";
-            cin >> nuevoIdObra;
+        // Validar si existe esa obra social
+        ArchivoObrasSociales archOS("obrassociales.dat");
+        int posOS = archOS.buscarPorId(nuevoIdObra);
 
-            // Validar si existe esa obra social
-            ArchivoObrasSociales archOS("obrassociales.dat");
-            int posOS = archOS.buscarPorId(nuevoIdObra);
-
-            if(posOS < 0){
-                cout << "La obra social con ese ID no existe." << endl;
-                system("pause");
-                return;
-            }
-
-            c.setIdObraSocial(nuevoIdObra);
-            break;
+        if(posOS < 0)
+        {
+            cout << "La obra social con ese ID no existe." << endl;
+            system("pause");
+            return;
         }
 
+        c.setIdObraSocial(nuevoIdObra);
+        break;
+    }
+    case 0:
+        cout << "Operacion cancelada." << endl;
+        system("pause");
+        return;
+    default:
+        cout << "Opcion invalida." << endl;
+        system("pause");
+        return;
+    }
 
+    if(archi.modificarCliente(c, pos)){
+        cout<<"El Cliente se modifico de manera correcta"<<endl;
+    } else{
+       cout<<"Error al modificar el cliente.";
+    }
 
-
-case 0:
-            cout << "Operación cancelada." << endl;
-            system("pause");
-            return;
-        default:
-            cout << "Opción inválida." << endl;
-            system("pause");
-            return;
-
-
-
+    system("pause");
 }
-
-if(archi.modificarCliente(c,pos)){
-
-    cout<<"El Cliente se modifico de manera correcta"<<endl;
-
-} else{
-
-   cout<<"Error al modificar el cliente.";
-}
-
-system("pause");
-
-}
-
-
-
 
 void ClientesManager::baja(){
-int cuilBuscado;
+long long cuilBuscado;
     cout << "Ingrese el CUIL del cliente a buscar: ";
     cin >> cuilBuscado;
 

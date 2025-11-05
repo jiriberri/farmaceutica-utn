@@ -23,7 +23,7 @@ public:
     bool modificarCliente(Cliente, int pos);
 
 
-    int buscarPorCUIL(int cuilSolicitado);
+    int buscarPorCUIL(long long cuilSolicitado);
 
     bool existe() const;
 };

@@ -86,7 +86,7 @@ return escribio;
 
 
 
-int ArchivoClientes::buscarPorCUIL(int cuilBuscado)
+int ArchivoClientes::buscarPorCUIL(long long cuilBuscado)
 {
     int total = cantidadRegistros();  // obtenemos cuántos clientes hay en el archivo
 
