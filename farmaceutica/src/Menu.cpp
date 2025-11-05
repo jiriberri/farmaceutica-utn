@@ -2,7 +2,7 @@
 #include "Menu.h"
 #include "ClientesManager.h"
 #include "ObrasSocialesManager.h"
-
+#include <iostream>
 using namespace std;
 
 void limpiarPantalla();
@@ -58,6 +58,8 @@ void Menu::menuClientes()
         cout << "1. Cargar cliente" << endl;
         cout << "2. Listar Clientes"<< endl;
         cout << "3. Buscar Cliente por CUIL"<<endl;
+        cout<<"4. Modificar Cliente"<<endl;
+
         cout << "0. Atras" << endl;
         cout << "Seleccione una opcion: ";
         cin >> opcion;
@@ -79,6 +81,12 @@ void Menu::menuClientes()
             limpiarPantalla();
             mgr.mostrarxCUIL();
             break;
+
+        case 4:
+            limpiarPantalla();
+            mgr.modificar();
+
+
         case 0:
             break;
         default:
@@ -102,6 +110,8 @@ void Menu::menuOS()
 
         cout << "1. Cargar Obra Social" << endl;
         cout << "2. Listar Obras Sociales"<< endl;
+        cout<< "3. Modificar Obra Social"<<endl;
+
         cout << "0. Atras" << endl;
         cout << "Seleccione una opcion: ";
         cin >> opcion;
@@ -119,6 +129,12 @@ void Menu::menuOS()
             limpiarPantalla();
             mgr.mostrar();
             break;
+
+
+        case 3:
+            limpiarPantalla();
+            mgr.modificar();
+
         case 0:
             break;
         default:

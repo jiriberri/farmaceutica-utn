@@ -10,7 +10,8 @@ public:
     void alta();
     void mostrar();
     void mostrarxCUIL();
-
+    void modificar();
+    void baja();
 };
 
 #endif // CLIENTESMANAGER_H

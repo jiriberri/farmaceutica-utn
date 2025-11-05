@@ -20,15 +20,13 @@ public:
 
     Cliente leerClientes(int pos);
 
+    bool modificarCliente(Cliente, int pos);
+
+
     int buscarPorCUIL(int cuilSolicitado);
 
     bool existe() const;
 };
-
-
-
-
-
 
 
 

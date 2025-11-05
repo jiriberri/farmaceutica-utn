@@ -62,6 +62,30 @@ Cliente ArchivoClientes::leerClientes(int pos)
     return c;
 }
 
+
+
+bool ArchivoClientes::modificarCliente(Cliente obj, int pos){
+
+FILE *p =fopen(_nombreArchivo.c_str(),"rb+");
+
+if(p==nullptr){
+
+    return false;
+
+}
+fseek(p, pos * sizeof obj, 0);
+bool escribio=fwrite(&obj,sizeof obj,1,p);
+fclose(p);
+return escribio;
+
+
+
+}
+
+
+
+
+
 int ArchivoClientes::buscarPorCUIL(int cuilBuscado)
 {
     int total = cantidadRegistros();  // obtenemos cuántos clientes hay en el archivo
@@ -87,4 +111,6 @@ bool ArchivoClientes::existe() const {
 
     return true;
 }
+
+
 

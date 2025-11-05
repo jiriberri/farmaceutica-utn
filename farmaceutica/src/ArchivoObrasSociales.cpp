@@ -72,6 +72,31 @@ int ArchivoObrasSociales::buscarPorId(int id)
     return -1;
 }
 
+
+
+bool ArchivoObrasSociales::modificarObraSocial(ObraSocial obj, int pos){
+
+FILE *p =fopen(_nombreArchivo.c_str(),"rb+");
+
+if(p==nullptr){
+
+    return false;
+
+}
+fseek(p, pos * sizeof obj, 0);
+bool escribio=fwrite(&obj,sizeof obj,1,p);
+fclose(p);
+return escribio;
+
+
+
+}
+
+
+
+
+
+
 bool ArchivoObrasSociales::existe() const {
     FILE* p = fopen(_nombreArchivo.c_str(), "rb");
 

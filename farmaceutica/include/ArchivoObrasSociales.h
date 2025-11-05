@@ -19,6 +19,8 @@ class ArchivoObrasSociales
 
         ObraSocial leerOS(int pos);
 
+        bool modificarObraSocial(ObraSocial, int pos);
+
         int buscarPorId(int id);
 
         bool existe() const;

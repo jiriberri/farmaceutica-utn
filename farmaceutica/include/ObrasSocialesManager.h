@@ -9,7 +9,7 @@ class ObrasSocialesManager
     public:
         void alta();
         void mostrar();
-
+        void modificar();
 };
 
 #endif // OBRASSOCIALESMANAGER_H

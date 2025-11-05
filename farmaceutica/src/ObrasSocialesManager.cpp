@@ -109,3 +109,93 @@ void ObrasSocialesManager::mostrar()
     delete[] os;
     system("pause");
 }
+
+
+void ObrasSocialesManager::modificar(){
+int idBuscado;
+cout<<"Ingrese el Cuil del cliente que quiera modificar: "<<endl;
+cin>> idBuscado;
+
+ArchivoObrasSociales archi("obrassociales.dat");
+
+int pos=archi.buscarPorId(idBuscado);
+
+if(pos<0){
+
+    cout << "ID no encontrado." << endl;
+      return;
+
+}
+ObraSocial OS;
+OS=archi.leerOS(pos);
+int opcion;
+
+    cout << "\n--- ID encontrado ---\n";
+    cout << "1. Modificar descripcion"<<endl;
+    cout << "2. Modificar descuento"<<endl;
+    cout << "3. Modificar telefono"<<endl;
+    cout << "4. Modificar mail"<<endl;
+    cout << "0. Cancelar"<<endl;
+    cout << "Seleccione una opcion: "<<endl;
+    cin >> opcion;
+
+
+switch(opcion){
+
+case 1:{ char nuevaDescripcion[100];
+         cout<<"Ingrese nuevo Domicilio"<<endl;
+         cin>>nuevaDescripcion;
+         OS.setDescripcion(nuevaDescripcion);
+         break;
+}
+
+case 2:{ float nuevoDescuento;
+         cout<<"Ingrese nuevo valor de Descuento"<<endl;
+         cin>>nuevoDescuento;
+         OS.setDescuento(nuevoDescuento);
+         break;
+}
+case 3:{ char nuevoTelefono[12];
+         cout<<"Ingrese nuevo Telefono"<<endl;
+         cin>>nuevoTelefono;
+         OS.setTelefono(nuevoTelefono);
+         break;
+}
+
+case 4:{ char nuevoMail[30];
+         cout<<"Ingrese nuevo Mail"<<endl;
+         cin>>nuevoMail;
+         OS.setMail(nuevoMail);
+         break;
+
+}
+
+case 0:
+            cout << "Operación cancelada." << endl;
+            system("pause");
+            return;
+        default:
+            cout << "Opción inválida." << endl;
+            system("pause");
+            return;
+
+}
+
+if(archi.modificarObraSocial(OS,pos)){
+
+    cout<<"La Obra Social se modifico de manera correcta"<<endl;
+
+} else{
+
+   cout<<"Error al modificar el cliente.";
+}
+
+system("pause");
+
+
+
+
+
+
+
+}
