@@ -1,13 +1,13 @@
-#include "ArchivoObrasSociales.h"
+#include "ArchivoProductos.h"
 #include <iostream>
 using namespace std;
 
-ArchivoObrasSociales::ArchivoObrasSociales(string nombreArchivo)
+ArchivoProductos::ArchivoProductos(string nombreArchivo)
 {
     _nombreArchivo = nombreArchivo;
 }
 
-bool ArchivoObrasSociales::guardarOS(ObraSocial reg)
+bool ArchivoProductos::guardarPr(Producto reg)
 {
     FILE* p = fopen(_nombreArchivo.c_str(), "ab");
     if (p == NULL)
@@ -16,13 +16,13 @@ bool ArchivoObrasSociales::guardarOS(ObraSocial reg)
         return 0;
     }
 
-    fwrite(&reg, sizeof(ObraSocial), 1, p);
+    fwrite(&reg, sizeof(Producto), 1, p);
     fclose(p);
 
     return true;
 }
 
-int ArchivoObrasSociales::cantidadRegistros()
+int ArchivoProductos::cantidadRegistros()
 {
     FILE* p= fopen(_nombreArchivo.c_str(),"rb");
 
@@ -33,48 +33,46 @@ int ArchivoObrasSociales::cantidadRegistros()
 
     fseek(p,0,SEEK_END);
 
-    int cantidad = ftell(p)/sizeof(ObraSocial);
+    int cantidad = ftell(p)/sizeof(Producto);
 
     return cantidad;
 }
 
-ObraSocial ArchivoObrasSociales::leerOS(int pos)
+Producto ArchivoProductos::leerPr(int pos)
 {
     FILE *p = fopen(_nombreArchivo.c_str(),"rb");
 
     if(p==nullptr)
     {
-        return ObraSocial();
+        return Producto();
     }
 
-    ObraSocial os;
+    Producto pr;
 
-    fseek(p, sizeof(ObraSocial) * pos, SEEK_SET);
-    fread(&os, sizeof(ObraSocial), 1, p);
+    fseek(p, sizeof(Producto) * pos, SEEK_SET);
+    fread(&pr, sizeof(Producto), 1, p);
     fclose(p);
 
-    return os;
+    return pr;
 }
 
-int ArchivoObrasSociales::buscarPorId(int id)
+int ArchivoProductos::buscarPorId(int id)
 {
     int total = cantidadRegistros();
 
     for (int i = 0; i < total; i++)
     {
-        ObraSocial os = leerOS(i);
-        if(os.getId() == id)
+        Producto pr = leerPr(i);
+        if(pr.getId() == id)
         {
             return i;
         }
     }
-
     return -1;
 }
 
-bool ArchivoObrasSociales::modificarObraSocial(ObraSocial obj, int pos)
+bool ArchivoProductos::modificarPr(Producto obj, int pos)
 {
-
     FILE *p =fopen(_nombreArchivo.c_str(),"rb+");
 
     if(p==nullptr)
@@ -87,7 +85,7 @@ bool ArchivoObrasSociales::modificarObraSocial(ObraSocial obj, int pos)
     return escribio;
 }
 
-bool ArchivoObrasSociales::existe() const
+bool ArchivoProductos::existe() const
 {
     FILE* p = fopen(_nombreArchivo.c_str(), "rb");
 
@@ -97,6 +95,3 @@ bool ArchivoObrasSociales::existe() const
 
     return true;
 }
-
-
-

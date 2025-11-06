@@ -8,6 +8,7 @@ public:
     void menuPrincipal();
     void menuClientes();
     void menuOS();
+    void menuProductos();
 
 private:
 };
