@@ -59,7 +59,7 @@ void Menu::menuClientes()
         cout << "2. Listar Clientes"<< endl;
         cout << "3. Buscar Cliente por CUIL"<<endl;
         cout << "4. Modificar Cliente"<<endl;
-
+        cout <<"5. Baja Cliente"<<endl;
         cout << "0. Atras" << endl;
         cout << "Seleccione una opcion: ";
         cin >> opcion;
@@ -86,6 +86,10 @@ void Menu::menuClientes()
             limpiarPantalla();
             mgr.modificar();
             break;
+        case 5:
+            limpiarPantalla();
+            mgr.baja();
+
         case 0:
             break;
         default:

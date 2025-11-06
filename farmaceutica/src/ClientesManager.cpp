@@ -105,6 +105,7 @@ void ClientesManager::mostrar()
     {
         Cliente c = clientes[i];
 
+        if (!c.getEliminado()) {
         cout << "CUIL: " << c.getCuil() << endl;
         cout << "Nombre: " << c.getNombre() << endl;
         cout << "Apellido: " << c.getApellido() << endl;
@@ -114,6 +115,9 @@ void ClientesManager::mostrar()
         cout << "Telefono: " << c.getTelefono() << endl;
         cout << "Eliminado: " << (c.getEliminado() ? "Sí" : "No") << endl;
         cout << "==============================================" << endl;
+
+
+        }
 
     }
 
@@ -271,11 +275,31 @@ void ClientesManager::modificar()
     system("pause");
 }
 
-void ClientesManager::baja(){
-long long cuilBuscado;
+void ClientesManager::baja() {
+    long long cuilBuscado;
     cout << "Ingrese el CUIL del cliente a buscar: ";
     cin >> cuilBuscado;
 
+    ArchivoClientes arc("clientes.dat");
+    int pos = arc.buscarPorCUIL(cuilBuscado);
 
+    if (pos < 0) {
+        cout << "No existe el CUIL en el archivo." << endl;
+        system("pause");
+        return;
+    }
+
+    Cliente obj = arc.leerClientes(pos);
+
+    if (obj.getEliminado()) {
+        cout << "El cliente ya esta dado de baja." << endl;
+        system("pause");
+        return;
+    }
+
+    obj.setEliminado(true);
+    arc.modificarCliente(obj, pos);
+
+    cout << "Cliente dado de baja correctamente." << endl;
+    system("pause");
 }
-
