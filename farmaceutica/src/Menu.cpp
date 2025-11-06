@@ -117,8 +117,8 @@ void Menu::menuOS()
         cout << "--- Menu Obras Sociales ---" << endl;
 
         cout << "1. Cargar Obra Social" << endl;
-        cout << "2. Listar Obras Sociales"<< endl;
-        cout<< "3. Modificar Obra Social"<<endl;
+        cout << "2. Listar Obras Sociales" << endl;
+        cout << "3. Modificar Obra Social" << endl;
 
         cout << "0. Atras" << endl;
         cout << "Seleccione una opcion: ";
@@ -137,12 +137,10 @@ void Menu::menuOS()
             limpiarPantalla();
             mgr.mostrar();
             break;
-
-
         case 3:
             limpiarPantalla();
             mgr.modificar();
-
+            break;
         case 0:
             break;
         default:
