@@ -97,19 +97,22 @@ void ObrasSocialesManager::mostrar()
     {
         ObraSocial o = os[i];
 
+        if(!o.getEliminado()){
+
         cout << "Id: " << o.getId() << endl;
         cout << "Descripcion: " << o.getDescripcion() << endl;
         cout << "Descuento: " << o.getDescuento() << endl;
         cout << "Telefono: " << o.getTelefono() << endl;
         cout << "Mail: " << o.getMail() << endl;
-        cout << "Eliminado: " << (o.getEliminado() ? "Sí" : "No") << endl;
+        //cout << "Eliminado: " << (o.getEliminado() ? "Sí" : "No") << endl;
         cout << "==============================================" << endl;
     }
 
+
+}
     delete[] os;
     system("pause");
 }
-
 
 void ObrasSocialesManager::modificar()
 {
@@ -207,5 +210,51 @@ void ObrasSocialesManager::modificar()
     {
         cout<<"Error al modificar el cliente.";
     }
+    system("pause");
+}
+
+void ObrasSocialesManager::baja() {
+    long long idBuscado;
+    cout << "Ingrese el ID de la Obra Social a buscar: ";
+    cin >> idBuscado;
+
+    ArchivoObrasSociales arc("obrassociales.dat");
+    int pos = arc.buscarPorId(idBuscado);
+
+    if (pos < 0) {
+        cout << "No existe el ID en el archivo." << endl;
+        system("pause");
+        return;
+    }
+
+    ObraSocial obj = arc.leerOS(pos);
+
+    if (obj.getEliminado()) {
+        cout << "La obra social ya esta dado de baja." << endl;
+        system("pause");
+        return;
+    }
+    cout << "\n--- Obra Social encontrada ---\n";
+    cout << "ID: " << obj.getId() << endl;
+    cout << "Descripcion: " << obj.getDescripcion() << endl;
+    cout << "Descuento: " << obj.getDescuento() << endl;
+    cout << "Telefono: " << obj.getTelefono() << endl;
+    cout << "Mail: " << obj.getMail() << endl;
+    cout << "-----------------------------" << endl;
+    char opcion;
+    cout << "¿Esta seguro que desea dar de baja la obra social? (S/N): ";
+    cin >> opcion;
+
+    if (opcion != 'S' && opcion!='s') {
+        cout << "Operacion cancelada." << endl;
+        system("pause");
+        return;
+    }
+
+
+    obj.setEliminado(true);
+    arc.modificarObraSocial(obj, pos);
+
+    cout << "La Obra Social fue dada de baja." << endl;
     system("pause");
 }

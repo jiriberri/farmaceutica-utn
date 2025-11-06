@@ -10,6 +10,7 @@ class ObrasSocialesManager
         void alta();
         void mostrar();
         void modificar();
+        void baja();
 };
 
 #endif // OBRASSOCIALESMANAGER_H

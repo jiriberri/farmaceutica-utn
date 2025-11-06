@@ -119,6 +119,7 @@ void Menu::menuOS()
         cout << "1. Cargar Obra Social" << endl;
         cout << "2. Listar Obras Sociales" << endl;
         cout << "3. Modificar Obra Social" << endl;
+        cout << "4. Baja Obra Social" << endl;
 
         cout << "0. Atras" << endl;
         cout << "Seleccione una opcion: ";
@@ -141,6 +142,10 @@ void Menu::menuOS()
             limpiarPantalla();
             mgr.modificar();
             break;
+        case 4:
+            limpiarPantalla();
+            mgr.baja();
+
         case 0:
             break;
         default:
@@ -178,11 +183,11 @@ void Menu::menuProductos()
         {
         case 1:
             limpiarPantalla();
-            mgr.alta();
+        //    mgr.alta();
             break;
         case 2:
             limpiarPantalla();
-            mgr.mostrar();
+          //  mgr.mostrar();
             break;
         case 0:
             break;

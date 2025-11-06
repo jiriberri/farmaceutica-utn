@@ -144,6 +144,13 @@ void ClientesManager::mostrarxCUIL()
 
     Cliente c = archi.leerClientes(pos);
 
+      if (c.getEliminado()) {
+        cout << "El cliente con ese CUIL está dado de baja." << endl;
+        system("pause");
+        return;
+    }
+
+
     cout << "\n--- Cliente encontrado ---\n";
     cout << "CUIL: " << c.getCuil() << endl;
     cout << "Nombre: " << c.getNombre() << endl;
