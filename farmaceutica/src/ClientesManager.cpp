@@ -296,6 +296,25 @@ void ClientesManager::baja() {
         system("pause");
         return;
     }
+    cout << "\n--- Cliente encontrado ---\n";
+    cout << "CUIL: " << obj.getCuil() << endl;
+    cout << "Nombre: " << obj.getNombre() << endl;
+    cout << "Apellido: " << obj.getApellido() << endl;
+    cout << "Obra Social: " << obj.getIdObraSocial() << endl;
+    cout << "Domicilio: " << obj.getDomicilio() << endl;
+    cout << "Teléfono: " << obj.getTelefono() << endl;
+    cout << "Mail: " << obj.getMail() << endl;
+    cout << "-----------------------------" << endl;
+    char opcion;
+    cout << "¿Está seguro que desea dar de baja este cliente? (S/N): ";
+    cin >> opcion;
+
+    if (opcion != 'S' && opcion!='s') {
+        cout << "Operación cancelada." << endl;
+        system("pause");
+        return;
+    }
+
 
     obj.setEliminado(true);
     arc.modificarCliente(obj, pos);
