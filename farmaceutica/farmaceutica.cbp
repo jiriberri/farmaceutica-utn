@@ -36,21 +36,27 @@
 		</Compiler>
 		<Unit filename="include/ArchivoClientes.h" />
 		<Unit filename="include/ArchivoObrasSociales.h" />
+		<Unit filename="include/ArchivoProductos.h" />
 		<Unit filename="include/Cliente.h" />
 		<Unit filename="include/ClientesManager.h" />
 		<Unit filename="include/Menu.h" />
 		<Unit filename="include/ObraSocial.h" />
 		<Unit filename="include/ObrasSocialesManager.h" />
 		<Unit filename="include/Persona.h" />
+		<Unit filename="include/Producto.h" />
+		<Unit filename="include/ProductosManager.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ArchivoClientes.cpp" />
 		<Unit filename="src/ArchivoObrasSociales.cpp" />
+		<Unit filename="src/ArchivoProductos.cpp" />
 		<Unit filename="src/Cliente.cpp" />
 		<Unit filename="src/ClientesManager.cpp" />
 		<Unit filename="src/Menu.cpp" />
 		<Unit filename="src/ObraSocial.cpp" />
 		<Unit filename="src/ObrasSocialesManager.cpp" />
 		<Unit filename="src/Persona.cpp" />
+		<Unit filename="src/Producto.cpp" />
+		<Unit filename="src/ProductosManager.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

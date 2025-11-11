@@ -1,3 +1,0 @@
-# Farmacéutica UTN
-
-# holaaaaa
