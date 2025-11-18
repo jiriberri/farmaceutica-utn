@@ -98,5 +98,26 @@ bool ArchivoObrasSociales::existe() const
     return true;
 }
 
+bool ArchivoObrasSociales::checkEliminado(int pos) const {
+    FILE* p = fopen(_nombreArchivo.c_str(), "rb");
 
+    if (p == nullptr) return false;
+
+    ObraSocial os;
+
+    fseek(p, sizeof(ObraSocial) * pos, SEEK_SET);
+    fread(&os, sizeof(ObraSocial), 1, p);
+
+    fclose(p);
+
+    return os.getEliminado();
+}
+
+bool ArchivoObrasSociales::reactivarOS(int pos) {
+    ObraSocial os = leerOS(pos);
+
+    os.setEliminado(false);
+
+    return modificarObraSocial(os, pos);
+}
 

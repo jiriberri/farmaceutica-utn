@@ -24,6 +24,10 @@ class ArchivoObrasSociales
         int buscarPorId(int id);
 
         bool existe() const;
+
+        bool checkEliminado(int pos) const;
+
+        bool reactivarOS(int pos);
 };
 
 #endif // ARCHIVOOBRASSOCIALES_H

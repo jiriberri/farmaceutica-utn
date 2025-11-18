@@ -17,10 +17,34 @@ void ObrasSocialesManager::alta()
     cout << "Id: ";
     cin >> id;
 
+    int pos = arch.buscarPorId(id);
 
-    if (arch.existe() && arch.buscarPorId(id) != -1)
+    if (arch.existe() && pos != -1)
     {
         cout << endl << "EL Id ingresado ya esta agregado" << endl;
+
+        if(arch.checkEliminado(pos))
+        {
+            char opcion;
+
+            cout << endl << "Esta obra social esta eliminada" << endl;
+            cout << "Desea reactivarla? (S/N): ";
+            cin >> opcion;
+            cout << endl;
+
+            if(opcion == 'S' || opcion == 's')
+            {
+                if (arch.reactivarOS(pos))
+                {
+                    cout << "La obra social fue reactivada exitosamente" << endl;
+                }
+                else
+                {
+                    cout << "No se pudo reactivar la obra social" << endl;
+                }
+            }
+        }
+
         system("pause");
         return;
     }

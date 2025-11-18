@@ -23,7 +23,6 @@ bool ArchivoClientes::guardarCliente(Cliente reg)
     return true;
 }
 
-
 int ArchivoClientes::cantidadRegistros()
 {
     FILE* p= fopen(_nombreArchivo.c_str(),"rb");
@@ -39,8 +38,6 @@ int ArchivoClientes::cantidadRegistros()
 
     return cantidad;
 }
-
-
 
 Cliente ArchivoClientes::leerClientes(int pos)
 {
@@ -62,29 +59,20 @@ Cliente ArchivoClientes::leerClientes(int pos)
     return c;
 }
 
+bool ArchivoClientes::modificarCliente(Cliente obj, int pos)
+{
 
+    FILE *p =fopen(_nombreArchivo.c_str(),"rb+");
 
-bool ArchivoClientes::modificarCliente(Cliente obj, int pos){
-
-FILE *p =fopen(_nombreArchivo.c_str(),"rb+");
-
-if(p==nullptr){
-
-    return false;
-
+    if(p==nullptr)
+    {
+        return false;
+    }
+    fseek(p, pos * sizeof obj, 0);
+    bool escribio=fwrite(&obj,sizeof obj,1,p);
+    fclose(p);
+    return escribio;
 }
-fseek(p, pos * sizeof obj, 0);
-bool escribio=fwrite(&obj,sizeof obj,1,p);
-fclose(p);
-return escribio;
-
-
-
-}
-
-
-
-
 
 int ArchivoClientes::buscarPorCUIL(long long cuilBuscado)
 {
@@ -112,5 +100,26 @@ bool ArchivoClientes::existe() const {
     return true;
 }
 
+bool ArchivoClientes::checkEliminado(int pos) const {
+    FILE* p = fopen(_nombreArchivo.c_str(), "rb");
 
+    if (p == nullptr) return false;
+
+    Cliente c;
+
+    fseek(p, sizeof(Cliente) * pos, SEEK_SET);
+    fread(&c, sizeof(Cliente), 1, p);
+
+    fclose(p);
+
+    return c.getEliminado();
+}
+
+bool ArchivoClientes::reactivarCliente(int pos) {
+    Cliente c = leerClientes(pos);
+
+    c.setEliminado(false);
+
+    return modificarCliente(c, pos);
+}
 

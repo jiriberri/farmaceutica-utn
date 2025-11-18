@@ -18,9 +18,33 @@ void ClientesManager::alta()
     cout << "CUIL: ";
     cin >> cuil;
 
-    if (arch.existe() && arch.buscarPorCUIL(cuil) != -1)
+    int pos = arch.buscarPorCUIL(cuil); //posicion al buscar por cuil, si no lo encuentra entonces es -1
+
+    if (arch.existe() && pos != -1)
     {
         cout << endl << "EL CUIL ingresado ya esta agregado" << endl;
+
+        if(arch.checkEliminado(pos))
+        {
+            char opcion;
+
+            cout << endl << "Este cliente esta eliminado" << endl;
+            cout << "Desea reactivarlo? (S/N): ";
+            cin >> opcion;
+            cout << endl;
+
+            if(opcion == 'S' || opcion == 's')
+            {
+                if (arch.reactivarCliente(pos))
+                {
+                    cout << "El cliente fue reactivado exitosamente" << endl;
+                }
+                else
+                {
+                    cout << "No se pudo reactivar el cliente" << endl;
+                }
+            }
+        }
         system("pause");
         return;
     }
@@ -313,7 +337,7 @@ void ClientesManager::baja() {
     cout << "Mail: " << obj.getMail() << endl;
     cout << "-----------------------------" << endl;
     char opcion;
-    cout << "¿Está seguro que desea dar de baja este cliente? (S/N): ";
+    cout << "Esta seguro que desea dar de baja este cliente? (S/N): ";
     cin >> opcion;
 
     if (opcion != 'S' && opcion!='s') {
