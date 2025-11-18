@@ -8,6 +8,7 @@ class ProductosManager
         void alta();
         void mostrar();
         void modificar();
+        void baja();
 
     protected:
 

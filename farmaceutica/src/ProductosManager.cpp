@@ -17,9 +17,34 @@ void ProductosManager::alta()
     cout << "Id: ";
     cin >> id;
 
-    if (arch.existe() && arch.buscarPorId(id) != -1)
+    int pos = arch.buscarPorId(id);
+
+    if (arch.existe() && pos != -1)
     {
         cout << endl << "EL Id ingresado ya esta agregado" << endl;
+
+        if(arch.checkEliminado(pos))
+        {
+            char opcion;
+
+            cout << endl << "Este producto esta eliminado" << endl;
+            cout << "Desea reactivarlo? (S/N): ";
+            cin >> opcion;
+            cout << endl;
+
+            if(opcion == 'S' || opcion == 's')
+            {
+                if (arch.reactivarPro(pos))
+                {
+                    cout << "El producto fue reactivado exitosamente" << endl;
+                }
+                else
+                {
+                    cout << "No se pudo reactivar el producto" << endl;
+                }
+            }
+        }
+
         system("pause");
         return;
     }
@@ -93,14 +118,147 @@ void ProductosManager::mostrar()
     {
         Producto prod = pr[i];
 
-        cout << "Id: " << prod.getId() << endl;
-        cout << "Descripcion: " << prod.getDescripcion() << endl;
-        cout << "Stock: " << prod.getStock() << endl;
-        cout << "Telefono: " << prod.getPrecioUnitario() << endl;
-        cout << "Eliminado: " << (prod.getEliminado() ? "Sí" : "No") << endl;
-        cout << "==============================================" << endl;
+        if(!prod.getEliminado()){
+            cout << "Id: " << prod.getId() << endl;
+            cout << "Descripcion: " << prod.getDescripcion() << endl;
+            cout << "Stock: " << prod.getStock() << endl;
+            cout << "Telefono: " << prod.getPrecioUnitario() << endl;
+            cout << "==============================================" << endl;
+        }
     }
 
     delete[] pr;
+    system("pause");
+}
+
+
+void ProductosManager::modificar()
+{
+    int idBuscado;
+    cout<<"Ingrese el id del producto que quiera modificar: ";
+    cin>> idBuscado;
+
+    ArchivoProductos archi("productos.dat");
+
+    int pos = archi.buscarPorId(idBuscado);
+
+    if (pos < 0)
+    {
+        cout << "ID no encontrado." << endl;
+        system("pause");
+        return;
+    }
+
+    Producto prod;
+    prod = archi.leerPr(pos);
+    int opcion;
+
+    cout << "\n--- Producto encontrado ---\n";
+    cout << "-----------------------------------------------" << endl;
+    cout << "ID: " << prod.getId() << endl;
+    cout << "Descripcion: " << prod.getDescripcion() << endl;
+    cout << "Stock: " << prod.getStock() << endl;
+    cout << "Precio Unitario: " << prod.getPrecioUnitario() << endl;
+    cout << "Eliminado: " << prod.getEliminado() << endl;
+    cout << "-----------------------------------------------" << endl;
+
+    cout << "1. Modificar descripcion" << endl;
+    cout << "2. Modificar stock" << endl;
+    cout << "3. Modificar precio" << endl;
+    cout << "0. Cancelar" << endl;
+    cout << "Seleccione una opcion: ";
+    cin >> opcion;
+    cout << endl;
+
+    switch(opcion)
+    {
+    case 1:
+    {
+        char nuevaDescripcion[100];
+        cout << "Ingrese nueva descripcion: ";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.getline(nuevaDescripcion, sizeof(nuevaDescripcion));
+        prod.setDescripcion(nuevaDescripcion);
+        break;
+    }
+    case 2:
+    {
+        int nuevoStock;
+        cout << "Ingrese nuevo stock: ";
+        cin >> nuevoStock;
+        prod.setStock(nuevoStock);
+        break;
+    }
+    case 3:
+    {
+        float nuevoPrecio;
+        cout << "Ingrese nuevo precio unitario: ";
+        cin >> nuevoPrecio;
+        prod.setPrecioUnitario(nuevoPrecio);
+        break;
+    }
+    case 0:
+        cout << "Operación cancelada." << endl;
+        system("pause");
+        return;
+    default:
+        cout << "Opción inválida." << endl;
+        system("pause");
+        return;
+    }
+
+    if(archi.modificarPr(prod,pos))
+    {
+        cout << "El producto se modifico de manera correcta" << endl;
+    }
+    else
+    {
+        cout<<"Error al modificar el producto.";
+    }
+    system("pause");
+}
+
+void ProductosManager::baja() {
+    int idBuscado;
+    cout << "Ingrese el ID del producto a buscar: ";
+    cin >> idBuscado;
+
+    ArchivoProductos arc("productos.dat");
+    int pos = arc.buscarPorId(idBuscado);
+
+    if (pos < 0) {
+        cout << "No existe el ID en el archivo." << endl;
+        system("pause");
+        return;
+    }
+
+    Producto obj = arc.leerPr(pos);
+
+    if (obj.getEliminado()) {
+        cout << "El producto ya esta dado de baja." << endl;
+        system("pause");
+        return;
+    }
+    cout << "\n--- Producto encontrado ---\n";
+    cout << "ID: " << obj.getId() << endl;
+    cout << "Descripcion: " << obj.getDescripcion() << endl;
+    cout << "Stock: " << obj.getStock() << endl;
+    cout << "Precio unitario: " << obj.getPrecioUnitario() << endl;
+    cout << "-----------------------------" << endl;
+    char opcion;
+    cout << "Esta seguro que desea dar de baja el producto? (S/N): ";
+    cin >> opcion;
+
+    if (opcion != 'S' && opcion!='s') {
+        cout << "Operacion cancelada." << endl;
+        system("pause");
+        return;
+    }
+
+
+    obj.setEliminado(true);
+    arc.modificarPr(obj, pos);
+
+    cout << "El producto fue dado de baja." << endl;
     system("pause");
 }

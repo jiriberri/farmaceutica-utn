@@ -23,6 +23,10 @@ class ArchivoProductos
         int buscarPorId(int id);
 
         bool existe() const;
+
+        bool checkEliminado(int pos) const;
+
+        bool reactivarPro(int pos);
 };
 
 #endif // ARCHIVOPRODUCTOS_H

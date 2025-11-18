@@ -122,15 +122,13 @@ void ObrasSocialesManager::mostrar()
         ObraSocial o = os[i];
 
         if(!o.getEliminado()){
-
-        cout << "Id: " << o.getId() << endl;
-        cout << "Descripcion: " << o.getDescripcion() << endl;
-        cout << "Descuento: " << o.getDescuento() << endl;
-        cout << "Telefono: " << o.getTelefono() << endl;
-        cout << "Mail: " << o.getMail() << endl;
-        //cout << "Eliminado: " << (o.getEliminado() ? "Sí" : "No") << endl;
-        cout << "==============================================" << endl;
-    }
+            cout << "Id: " << o.getId() << endl;
+            cout << "Descripcion: " << o.getDescripcion() << endl;
+            cout << "Descuento: " << o.getDescuento() << endl;
+            cout << "Telefono: " << o.getTelefono() << endl;
+            cout << "Mail: " << o.getMail() << endl;
+            cout << "==============================================" << endl;
+        }
 
 
 }
@@ -141,7 +139,7 @@ void ObrasSocialesManager::mostrar()
 void ObrasSocialesManager::modificar()
 {
     int idBuscado;
-    cout<<"Ingrese el id de la obra socialque quiera modificar: ";
+    cout<<"Ingrese el id de la obra social que quiera modificar: ";
     cin>> idBuscado;
 
     ArchivoObrasSociales archi("obrassociales.dat");
@@ -232,13 +230,13 @@ void ObrasSocialesManager::modificar()
     }
     else
     {
-        cout<<"Error al modificar el cliente.";
+        cout<<"Error al modificar la obra social.";
     }
     system("pause");
 }
 
 void ObrasSocialesManager::baja() {
-    long long idBuscado;
+    int idBuscado;
     cout << "Ingrese el ID de la Obra Social a buscar: ";
     cin >> idBuscado;
 

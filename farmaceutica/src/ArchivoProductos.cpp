@@ -95,3 +95,26 @@ bool ArchivoProductos::existe() const
 
     return true;
 }
+
+bool ArchivoProductos::checkEliminado(int pos) const {
+    FILE* p = fopen(_nombreArchivo.c_str(), "rb");
+
+    if (p == nullptr) return false;
+
+    Producto pr;
+
+    fseek(p, sizeof(Producto) * pos, SEEK_SET);
+    fread(&pr, sizeof(Producto), 1, p);
+
+    fclose(p);
+
+    return pr.getEliminado();
+}
+
+bool ArchivoProductos::reactivarPro(int pos) {
+    Producto pr = leerPr(pos);
+
+    pr.setEliminado(false);
+
+    return modificarPr(pr, pos);
+}

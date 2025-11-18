@@ -183,12 +183,19 @@ void Menu::menuProductos()
         {
         case 1:
             limpiarPantalla();
-        //    mgr.alta();
+            mgr.alta();
             break;
         case 2:
             limpiarPantalla();
-          //  mgr.mostrar();
+            mgr.mostrar();
             break;
+        case 3:
+            limpiarPantalla();
+            mgr.modificar();
+            break;
+        case 4:
+            limpiarPantalla();
+            mgr.baja();
         case 0:
             break;
         default:
