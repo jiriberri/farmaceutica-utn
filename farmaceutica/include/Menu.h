@@ -9,6 +9,7 @@ public:
     void menuClientes();
     void menuOS();
     void menuProductos();
+    void menuVentas();
 
 private:
 };

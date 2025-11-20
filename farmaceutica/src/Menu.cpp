@@ -3,6 +3,7 @@
 #include "ClientesManager.h"
 #include "ObrasSocialesManager.h"
 #include "ProductosManager.h"
+#include "VentasManager.h"
 #include <iostream>
 using namespace std;
 
@@ -21,6 +22,7 @@ void Menu::menuPrincipal()
         cout << "1. Clientes" << endl;
         cout << "2. Obras Sociales" << endl;
         cout << "3. Productos" << endl;
+        cout << "4. Ventas" << endl;
 
         cout << "0. Salir" << endl;
         cout << "Seleccione una opcion: ";
@@ -37,6 +39,9 @@ void Menu::menuPrincipal()
             break;
         case 3:
             menuProductos();
+            break;
+        case 4:
+            menuVentas();
             break;
         case 0:
             cout << "Saliendo del programa..." << endl;
@@ -196,6 +201,45 @@ void Menu::menuProductos()
         case 4:
             limpiarPantalla();
             mgr.baja();
+        case 0:
+            break;
+        default:
+            cout << "Opcion invalida. Intente de nuevo." << endl << endl;
+            system("pause");
+            cout << endl;
+        }
+    }
+    while(opcion != 0);
+}
+
+void Menu::menuVentas()
+{
+    int opcion;
+
+    do
+    {
+        limpiarPantalla();
+
+        cout << "--- Menu Ventas ---" << endl;
+
+        cout << "1. Nueva venta" << endl;
+        cout << "2. Listar ventas"<< endl;
+        cout << "3. Buscar por numero de factura" << endl;
+        cout << "4. Eliminar venta" << endl;
+
+        cout << "0. Atras" << endl;
+        cout << "Seleccione una opcion: ";
+        cin >> opcion;
+        cout << endl;
+
+        VentasManager mgr;
+
+        switch (opcion)
+        {
+        case 1:
+            limpiarPantalla();
+            mgr.alta();
+            break;
         case 0:
             break;
         default:

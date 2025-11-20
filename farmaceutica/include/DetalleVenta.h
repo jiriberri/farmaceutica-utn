@@ -1,23 +1,25 @@
 #ifndef DETALLEVENTA_H
 #define DETALLEVENTA_H
-
+#pragma once
 #include "Producto.h"
 
 
 
-class DetalleVenta {
-
+class DetalleVenta
+{
 private:
-int _NumFactura;
-int _idProducto;
-int _Cantidad;
-float _Precio;
-bool _Eliminado;
+    int _numFactura;
+    int _idProducto;
+    int _cantidad;
+    float _precio;
+    bool _eliminado;
 
 public:
-    DetalleVenta(int NumFactura=0, int idProducto=0, int Cantidad=0, float Precio 0.0f, bool eliminado= false);
-
-
+    DetalleVenta(int numFactura = 0,
+                 int idProducto = 0,
+                 int cantidad = 0,
+                 float precio = 0.0f,
+                 bool eliminado = false);
 
     ///Getters
     int getNumFactura();
@@ -27,13 +29,10 @@ public:
     bool getEliminado();
 
     ///Setters
-
     void setNumFactura(int numFactura);
     void setIdProducto(int idProducto);
     void setCantidad(int cantidad);
     void setPrecio(float precio);
     void setEliminado(bool eliminado);
-
-}
-
+};
 #endif
