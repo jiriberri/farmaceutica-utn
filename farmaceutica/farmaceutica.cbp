@@ -38,6 +38,7 @@
 		<Unit filename="include/ArchivoDetalleVenta.h" />
 		<Unit filename="include/ArchivoObrasSociales.h" />
 		<Unit filename="include/ArchivoProductos.h" />
+		<Unit filename="include/ArchivoVentas.h" />
 		<Unit filename="include/Cliente.h" />
 		<Unit filename="include/ClientesManager.h" />
 		<Unit filename="include/DetalleVenta.h" />
@@ -47,6 +48,7 @@
 		<Unit filename="include/Persona.h" />
 		<Unit filename="include/Producto.h" />
 		<Unit filename="include/ProductosManager.h" />
+		<Unit filename="include/Vendedor.h" />
 		<Unit filename="include/Venta.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ArchivoClientes.cpp" />
@@ -61,6 +63,7 @@
 		<Unit filename="src/Persona.cpp" />
 		<Unit filename="src/Producto.cpp" />
 		<Unit filename="src/ProductosManager.cpp" />
+		<Unit filename="src/Venta.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
