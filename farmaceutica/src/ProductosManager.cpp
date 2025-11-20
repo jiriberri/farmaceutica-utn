@@ -11,6 +11,7 @@ void ProductosManager::alta()
     int id, s;
     char d[100]{};
     float p;
+    bool apDesc = false;
     ArchivoProductos arch("productos.dat");
 
     cout << "Ingrese datos del producto" << endl;
@@ -50,6 +51,8 @@ void ProductosManager::alta()
     }
     else
     {
+        char opcion;
+
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Descripcion: ";
         cin.getline(d, sizeof(d));
@@ -61,9 +64,13 @@ void ProductosManager::alta()
         cout << "Precio Unitario: ";
         cin >> p;
 
+        cout << "Aplica descuento? (S/N): ";
+        cin >> opcion;
+        if(opcion == 'S' || opcion == 's') apDesc = true;
+
         cout << endl;
 
-        Producto pr(id, d, s, p, false);
+        Producto pr(id, d, s, p, apDesc,false);
 
         ArchivoProductos archi("productos.dat");
 
@@ -122,7 +129,8 @@ void ProductosManager::mostrar()
             cout << "Id: " << prod.getId() << endl;
             cout << "Descripcion: " << prod.getDescripcion() << endl;
             cout << "Stock: " << prod.getStock() << endl;
-            cout << "Telefono: " << prod.getPrecioUnitario() << endl;
+            cout << "Precio unitario: " << prod.getPrecioUnitario() << endl;
+            cout << "Aplica descuento: " << (prod.getAplicaDescuento() ? "Si" : "No") << endl;
             cout << "==============================================" << endl;
         }
     }
@@ -158,13 +166,15 @@ void ProductosManager::modificar()
     cout << "ID: " << prod.getId() << endl;
     cout << "Descripcion: " << prod.getDescripcion() << endl;
     cout << "Stock: " << prod.getStock() << endl;
-    cout << "Precio Unitario: " << prod.getPrecioUnitario() << endl;
+    cout << "Precio unitario: " << prod.getPrecioUnitario() << endl;
+    cout << "Aplica descuento: " << (prod.getAplicaDescuento() ? "Si" : "No") << endl;
     cout << "Eliminado: " << prod.getEliminado() << endl;
     cout << "-----------------------------------------------" << endl;
 
     cout << "1. Modificar descripcion" << endl;
     cout << "2. Modificar stock" << endl;
     cout << "3. Modificar precio" << endl;
+    cout << "4. Modificar si aplica descuento" << endl;
     cout << "0. Cancelar" << endl;
     cout << "Seleccione una opcion: ";
     cin >> opcion;
@@ -197,17 +207,23 @@ void ProductosManager::modificar()
         prod.setPrecioUnitario(nuevoPrecio);
         break;
     }
+    case 4:
+        char apDesc;
+        cout << "Ingrese si aplica descuento o no (S/N): ";
+        cin >> apDesc;
+        prod.setAplicaDescuento(apDesc == 'S' || apDesc == 's');
+        break;
     case 0:
-        cout << "Operación cancelada." << endl;
+        cout << "Operacion cancelada." << endl;
         system("pause");
         return;
     default:
-        cout << "Opción inválida." << endl;
+        cout << "Opcion invalida." << endl;
         system("pause");
         return;
     }
 
-    if(archi.modificarPr(prod,pos))
+    if(archi.modificarPr(prod, pos))
     {
         cout << "El producto se modifico de manera correcta" << endl;
     }
@@ -244,6 +260,7 @@ void ProductosManager::baja() {
     cout << "Descripcion: " << obj.getDescripcion() << endl;
     cout << "Stock: " << obj.getStock() << endl;
     cout << "Precio unitario: " << obj.getPrecioUnitario() << endl;
+    cout << "Aplica descuento: " << (obj.getAplicaDescuento() ? "Si" : "No") << endl;
     cout << "-----------------------------" << endl;
     char opcion;
     cout << "Esta seguro que desea dar de baja el producto? (S/N): ";
@@ -254,7 +271,6 @@ void ProductosManager::baja() {
         system("pause");
         return;
     }
-
 
     obj.setEliminado(true);
     arc.modificarPr(obj, pos);

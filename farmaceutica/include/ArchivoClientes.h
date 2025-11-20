@@ -21,7 +21,6 @@ public:
 
     bool modificarCliente(Cliente, int pos);
 
-
     int buscarPorCUIL(long long cuilSolicitado);
 
     bool existe() const;

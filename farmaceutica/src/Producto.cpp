@@ -1,12 +1,13 @@
 #include "Producto.h"
 #include <cstring>
 
-Producto::Producto(int id, const char* d, int s, float p, bool e)
+Producto::Producto(int id, const char* d, int s, float p, bool apDesc, bool e)
 {
     setId(id);
     setDescripcion(d);
     setStock(s);
     setPrecioUnitario(p);
+    setAplicaDescuento(apDesc);
     setEliminado(e);
 }
 
@@ -14,6 +15,7 @@ int Producto::getId() const { return _id; }
 const char* Producto::getDescripcion() const { return _descripcion; }
 int Producto::getStock() const { return _stock; }
 float Producto::getPrecioUnitario() const { return _precioUnitario; }
+bool Producto::getAplicaDescuento() const { return _aplicaDescuento; }
 bool Producto::getEliminado() const { return _eliminado; }
 
 void Producto::setId(int id)
@@ -32,6 +34,10 @@ void Producto::setStock(int s)
 void Producto::setPrecioUnitario(float p)
 {
     _precioUnitario = p;
+}
+void Producto::setAplicaDescuento(bool apDesc)
+{
+    _aplicaDescuento = apDesc;
 }
 void Producto::setEliminado(bool e)
 {

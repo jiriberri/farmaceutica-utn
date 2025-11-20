@@ -12,7 +12,7 @@ bool ArchivoObrasSociales::guardarOS(ObraSocial reg)
     FILE* p = fopen(_nombreArchivo.c_str(), "ab");
     if (p == NULL)
     {
-        cout << "Error, archivo no encontrado 1." << endl;
+        cout << "Error, archivo no encontrado" << endl;
         return 0;
     }
 
@@ -28,12 +28,15 @@ int ArchivoObrasSociales::cantidadRegistros()
 
     if(p == NULL)
     {
-        cout<<"Error, archivo no encontrado 2."<<endl;
+        cout << "Error, archivo no encontrado" << endl;
+        return 0;
     }
 
     fseek(p,0,SEEK_END);
 
     int cantidad = ftell(p)/sizeof(ObraSocial);
+
+    fclose(p);
 
     return cantidad;
 }

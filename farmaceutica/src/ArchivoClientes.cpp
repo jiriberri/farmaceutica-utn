@@ -29,12 +29,15 @@ int ArchivoClientes::cantidadRegistros()
 
     if(p == NULL)
     {
-        cout<<"Error, archivo no encontrado"<<endl;
+        cout << "Error, archivo no encontrado" << endl;
+        return 0;
     }
 
-    fseek(p,0,SEEK_END); // va al final del archivo
+    fseek(p,0,SEEK_END);
 
-    int cantidad= ftell(p)/sizeof(Cliente); // Posicion actual / tamaño Cliente
+    int cantidad= ftell(p)/sizeof(Cliente);
+
+    fclose(p);
 
     return cantidad;
 }

@@ -26,14 +26,16 @@ int ArchivoProductos::cantidadRegistros()
 {
     FILE* p= fopen(_nombreArchivo.c_str(),"rb");
 
-    if(p == NULL)
-    {
-        cout<<"Error, archivo no encontrado 2."<<endl;
+    if (p == NULL) {
+        cout << "Error, archivo no encontrado 2." << endl;
+        return 0;
     }
 
     fseek(p,0,SEEK_END);
 
     int cantidad = ftell(p)/sizeof(Producto);
+
+    fclose(p);
 
     return cantidad;
 }
