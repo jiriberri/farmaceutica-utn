@@ -50,10 +50,13 @@
 		<Unit filename="include/ProductosManager.h" />
 		<Unit filename="include/Vendedor.h" />
 		<Unit filename="include/Venta.h" />
+		<Unit filename="include/VentasManager.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ArchivoClientes.cpp" />
+		<Unit filename="src/ArchivoDetalleVenta.cpp" />
 		<Unit filename="src/ArchivoObrasSociales.cpp" />
 		<Unit filename="src/ArchivoProductos.cpp" />
+		<Unit filename="src/ArchivoVentas.cpp" />
 		<Unit filename="src/Cliente.cpp" />
 		<Unit filename="src/ClientesManager.cpp" />
 		<Unit filename="src/DetalleVenta.cpp" />
@@ -64,6 +67,7 @@
 		<Unit filename="src/Producto.cpp" />
 		<Unit filename="src/ProductosManager.cpp" />
 		<Unit filename="src/Venta.cpp" />
+		<Unit filename="src/VentasManager.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
