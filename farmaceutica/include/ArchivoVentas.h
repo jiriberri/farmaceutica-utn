@@ -24,6 +24,3 @@ public:
     int buscarPorNumFactura(int numFactura);
     bool existe() const;
 };
-
-
-#endif // ARCHIVOVENTAS_H_INCLUDED

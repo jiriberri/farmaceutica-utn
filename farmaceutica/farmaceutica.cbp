@@ -42,6 +42,7 @@
 		<Unit filename="include/Cliente.h" />
 		<Unit filename="include/ClientesManager.h" />
 		<Unit filename="include/DetalleVenta.h" />
+		<Unit filename="include/Fecha.h" />
 		<Unit filename="include/Menu.h" />
 		<Unit filename="include/ObraSocial.h" />
 		<Unit filename="include/ObrasSocialesManager.h" />
@@ -60,6 +61,7 @@
 		<Unit filename="src/Cliente.cpp" />
 		<Unit filename="src/ClientesManager.cpp" />
 		<Unit filename="src/DetalleVenta.cpp" />
+		<Unit filename="src/Fecha.cpp" />
 		<Unit filename="src/Menu.cpp" />
 		<Unit filename="src/ObraSocial.cpp" />
 		<Unit filename="src/ObrasSocialesManager.cpp" />

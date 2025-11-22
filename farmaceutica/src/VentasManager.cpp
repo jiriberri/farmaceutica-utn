@@ -12,7 +12,7 @@ using namespace std;
 
 bool checkCliente(long long);
 bool checkProducto(int);
-bool checkStock();
+bool checkStock(int, int);
 float obtenerPrecio(int);
 float obtenerDescuento(long long, int);
 
@@ -51,6 +51,8 @@ void VentasManager::alta()
 
         cout << "Cantidad: ";
         cin >> cantxPr;
+
+        if (!checkStock(cantxPr, idPr)) return;
 
         precio = obtenerPrecio(idPr);
         cout << "Precio individual: " << precio << endl;
@@ -105,9 +107,38 @@ bool checkProducto(int id)
     return true;
 }
 
-bool checkStock()
+bool checkStock(int cantxPr, int id)
 {
+    ArchivoProductos archPr("productos.dat");
+    Producto prod;
 
+    int pos = archPr.buscarPorId(id);
+
+    prod = archPr.leerPr(pos);
+
+    int stock = prod.getStock();
+
+    if((stock - cantxPr) < 0)
+    {
+        cout << endl;
+        cout << "La cantidad a vender supera el stock actual" << endl;
+        cout << "Stock actual: " << stock << endl;
+        system("pause");
+        return false;
+    }
+    else
+    {
+        prod.setStock(stock - cantxPr);
+        bool resModif = archPr.modificarPr(prod, pos);
+
+        if(resModif) return true;
+        else
+        {
+            cout << "Error al actualizar el stock" << endl;
+            system("pause");
+            return false;
+        }
+    }
 }
 
 float obtenerPrecio(int id)
