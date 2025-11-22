@@ -13,11 +13,10 @@ public:
 
     ArchivoDetalleVenta(std::string nombreArchivo);
 
-    // bool guardarDetalleVenta(Detalleventas reg);
+    bool guardarDetalleVenta(DetalleVenta reg);
     int Cantidadregistros();
     DetalleVenta leerDetalleVenta(int pos);
-    // bool modificarVenta(Venta obj, int pos);
-
+    bool modificarDetalleVenta(DetalleVenta obj, int pos);
     int buscarPorNumFactura(int numFactura);
     bool existe() const;
 

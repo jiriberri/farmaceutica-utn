@@ -77,6 +77,26 @@ bool ArchivoVentas::modificarVenta(Venta obj, int pos)
     return escribio;
 }
 
+int ArchivoVentas::buscarPorNumFactura(int numFactura)
+{
+    int total = cantidadRegistros();
+
+    for (int i = 0; i < total; i++)
+    {
+        Venta v = leerVenta(i);
+        if (v.getNumFacturas() == numFactura)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+
+
+
+
 bool ArchivoVentas::existe() const {
     FILE* p = fopen(_nombreArchivo.c_str(), "rb");
 
