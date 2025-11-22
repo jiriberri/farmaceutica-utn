@@ -27,4 +27,5 @@ void DetalleVenta::setNumFactura(int numFactura){ _numFactura = numFactura; }
 void DetalleVenta::setIdProducto(int idProducto){ _idProducto = idProducto; }
 void DetalleVenta::setCantidad(int cantidad){ _cantidad = cantidad; }
 void DetalleVenta::setPrecio(float precio){ _precio = precio; }
+// agregar setSubtotal y todo lo que conlleva
 void DetalleVenta::setEliminado(bool eliminado){ _eliminado = eliminado; }

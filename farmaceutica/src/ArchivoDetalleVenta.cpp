@@ -57,7 +57,7 @@ DetalleVenta ArchivoDetalleVenta::leerDetalleVenta(int pos)
 
     return Dv;
 }
-bool ArchivoDetalleVenta::modificarVenta(DetalleVenta obj, int pos)
+bool ArchivoDetalleVenta::modificarDetalleVenta(DetalleVenta obj, int pos)
 {
     FILE* p = fopen(_nombreArchivo.c_str(), "rb+");
     if (p == NULL)

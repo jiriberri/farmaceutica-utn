@@ -7,31 +7,36 @@
 #include "ArchivoObrasSociales.h"
 #include "ObraSocial.h"
 #include "Cliente.h"
+#include "Fecha.h"
+#include "DetalleVenta.h"
+#include "Venta.h"
 
 using namespace std;
 
 bool checkCliente(long long);
 bool checkProducto(int);
 bool checkStock(int, int);
+bool restarStock(int, int);
 float obtenerPrecio(int);
 float obtenerDescuento(long long, int);
 
 void VentasManager::alta()
 {
     long long cuil , cantVenta = 0, idPr, cantxPr;
-    float precio = 0, total = 0;
     char med[20]{};
 
     ArchivoProductos archPr("productos.dat");
-
+    
     cout << "Ingrese datos de la venta" << endl;
     cout << "Venta #" << 1 << endl; //cambiar numero por uno autoincremental
-
+    
     cout << "Cuil Cliente: ";
     cin >> cuil;
     if (!checkCliente(cuil)) return;
-
-    cout << "Fecha: " << "20/11/2025" << endl; //tomar fecha actual
+    
+    Fecha fecha;
+    Fecha obj = fecha.fechaActual();
+    cout << "Fecha: " << obj.getDia() << "/" << obj.getMes() << "/" << obj.getAnio() << endl; //tomar fecha actual
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     cout << "Medio de pago: ";
@@ -42,19 +47,28 @@ void VentasManager::alta()
 
     cout << endl;
 
+    DetalleVenta* detalles = new DetalleVenta[cantVenta];
+
+    float total = 0;
+
     for(int i = 0; i < cantVenta ; i++) {
         cout << "Item #" << i+1 << endl;
 
         cout << "idProducto: ";
         cin >> idPr;
-        if (!checkProducto(idPr)) return;
+        if (!checkProducto(idPr)) {
+            delete[] detalles;
+            return;
+        }
 
         cout << "Cantidad: ";
         cin >> cantxPr;
+        if (!checkStock(cantxPr, idPr)) {
+            delete[] detalles;
+            return;
+        }
 
-        if (!checkStock(cantxPr, idPr)) return;
-
-        precio = obtenerPrecio(idPr);
+        float precio = obtenerPrecio(idPr);
         cout << "Precio individual: " << precio << endl;
 
         float desc = obtenerDescuento(cuil, idPr);
@@ -63,20 +77,25 @@ void VentasManager::alta()
             cout << "Descuento: " << (1.0f - desc) * 100 << "%" << endl;
         }
 
-        cout << "Subtotal: " << (precio * cantxPr * desc) << endl;
+        float subtotal = precio * cantxPr * desc;
+        cout << "Subtotal: " << subtotal << endl;
 
-        total += (precio * cantxPr * desc);
+        total += subtotal;
 
         cout << endl;
+
+        detalles[i].setIdProducto(idPr);
+        detalles[i].setCantidad(cantxPr);
+        detalles[i].setPrecio(precio);
+        detalles[i].setSubtotal(subtotal);
     }
 
-    if(cantVenta == 0)
+    if(cantVenta <= 0)
     {
         cout << "No hay productos a cargar." << endl;
     } else {
         cout << "Total a pagar: "<< total << endl;
     }
-
 
     system("pause");
 }
@@ -126,18 +145,30 @@ bool checkStock(int cantxPr, int id)
         system("pause");
         return false;
     }
+    else return true;
+
+}
+
+bool restarStock(int cantxPr, int id)
+{
+    ArchivoProductos archPr("productos.dat");
+    Producto prod;
+
+    int pos = archPr.buscarPorId(id);
+
+    prod = archPr.leerPr(pos);
+
+    int stock = prod.getStock();
+
+    prod.setStock(stock - cantxPr);
+    bool resModif = archPr.modificarPr(prod, pos);
+
+    if(resModif) return true;
     else
     {
-        prod.setStock(stock - cantxPr);
-        bool resModif = archPr.modificarPr(prod, pos);
-
-        if(resModif) return true;
-        else
-        {
-            cout << "Error al actualizar el stock" << endl;
-            system("pause");
-            return false;
-        }
+        cout << "Error al actualizar el stock" << endl;
+        system("pause");
+        return false;
     }
 }
 
