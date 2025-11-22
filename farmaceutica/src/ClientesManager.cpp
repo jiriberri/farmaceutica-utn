@@ -7,6 +7,8 @@
 
 using namespace std;
 
+void imprimirCliente(const Cliente &c);
+
 void ClientesManager::alta()
 {
     long long cuil;
@@ -130,17 +132,8 @@ void ClientesManager::mostrar()
         Cliente c = clientes[i];
 
         if (!c.getEliminado()) {
-        cout << "CUIL: " << c.getCuil() << endl;
-        cout << "Nombre: " << c.getNombre() << endl;
-        cout << "Apellido: " << c.getApellido() << endl;
-        cout << "Obra Social: " << c.getIdObraSocial() << endl;
-        cout << "Domicilio: " << c.getDomicilio() << endl;
-        cout << "Mail: " << c.getMail() << endl;
-        cout << "Telefono: " << c.getTelefono() << endl;
-        cout << "Eliminado: " << (c.getEliminado() ? "Sí" : "No") << endl;
-        cout << "==============================================" << endl;
-
-
+            imprimirCliente(c);
+            cout << "==============================================" << endl;
         }
 
     }
@@ -168,23 +161,16 @@ void ClientesManager::mostrarxCUIL()
 
     Cliente c = archi.leerClientes(pos);
 
-      if (c.getEliminado()) {
-        cout << "El cliente con ese CUIL está dado de baja." << endl;
+    if (c.getEliminado()) {
+        cout << "El cliente con ese CUIL esta dado de baja." << endl;
         system("pause");
         return;
     }
 
 
     cout << "\n--- Cliente encontrado ---\n";
-    cout << "CUIL: " << c.getCuil() << endl;
-    cout << "Nombre: " << c.getNombre() << endl;
-    cout << "Apellido: " << c.getApellido() << endl;
-    cout << "Obra Social: " << c.getIdObraSocial() << endl;
-    cout << "Domicilio: " << c.getDomicilio() << endl;
-    cout << "Mail: " << c.getMail() << endl;
-    cout << "Telefono: " << c.getTelefono() << endl;
-    cout << "Eliminado: " << (c.getEliminado() ? "Sí" : "No") << endl;
-    cout << "==============================" << endl;
+    imprimirCliente(c);
+    cout << "==============================================" << endl;
 
     system("pause");
 }
@@ -209,21 +195,17 @@ void ClientesManager::modificar()
     Cliente c;
     c=archi.leerClientes(pos);
 
+    if (c.getEliminado()) {
+        cout << "El cliente esta dado de baja. Para reactivarlo, agreguelo nuevamente." << endl;
+        system("pause");
+        return;
+    }
+
     int opcion;
     cout << "\n--- Cliente encontrado ---\n";
-    cout<<"-----------------------------------------------"<<endl;
-    cout << "CUIL: " << c.getCuil() << endl;
-    cout << "Nombre: " << c.getNombre() << endl;
-    cout << "Apellido: " << c.getApellido() << endl;
-    cout << "Obra Social: " << c.getIdObraSocial() << endl;
-    cout << "Domicilio: " << c.getDomicilio() << endl;
-    cout << "Mail: " << c.getMail() << endl;
-    cout << "Telefono: " << c.getTelefono() << endl;
-    cout << "Eliminado: " << (c.getEliminado() ? "Sí" : "No") << endl;
-    cout << "---------------------------------------------" << endl;
-
-
-
+    cout << "==============================================" << endl;
+    imprimirCliente(c);
+    cout << "==============================================" << endl;
 
     cout << "1. Modificar domicilio"<<endl;
     cout << "2. Modificar mail"<<endl;
@@ -241,7 +223,7 @@ void ClientesManager::modificar()
     case 1:
     {
         char nuevoDomicilio[50];
-        cout<<"Ingrese nuevo Domicilio: ";
+        cout<<"Ingrese nuevo domicilio: ";
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cin.getline(nuevoDomicilio, sizeof(nuevoDomicilio));
         c.setDomicilio(nuevoDomicilio);
@@ -260,7 +242,7 @@ void ClientesManager::modificar()
     case 3:
     {
         char nuevoTelefono[12];
-        cout << "Ingrese nuevo teléfono: ";
+        cout << "Ingrese nuevo telefono: ";
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cin.getline(nuevoTelefono, sizeof(nuevoTelefono));
         c.setTelefono(nuevoTelefono);
@@ -328,20 +310,16 @@ void ClientesManager::baja() {
         return;
     }
     cout << "\n--- Cliente encontrado ---\n";
-    cout << "CUIL: " << obj.getCuil() << endl;
-    cout << "Nombre: " << obj.getNombre() << endl;
-    cout << "Apellido: " << obj.getApellido() << endl;
-    cout << "Obra Social: " << obj.getIdObraSocial() << endl;
-    cout << "Domicilio: " << obj.getDomicilio() << endl;
-    cout << "Teléfono: " << obj.getTelefono() << endl;
-    cout << "Mail: " << obj.getMail() << endl;
-    cout << "-----------------------------" << endl;
+    imprimirCliente(obj);
+    cout << "Eliminado: " << (obj.getEliminado() ? "Sí" : "No") << endl;
+    cout << "==============================================" << endl;
+
     char opcion;
     cout << "Esta seguro que desea dar de baja este cliente? (S/N): ";
     cin >> opcion;
 
     if (opcion != 'S' && opcion!='s') {
-        cout << "Operación cancelada." << endl;
+        cout << "Operacion cancelada." << endl;
         system("pause");
         return;
     }
@@ -352,4 +330,14 @@ void ClientesManager::baja() {
 
     cout << "Cliente dado de baja correctamente." << endl;
     system("pause");
+}
+
+void imprimirCliente(const Cliente &c){
+    cout << "CUIL: " << c.getCuil() << endl;
+    cout << "Nombre: " << c.getNombre() << endl;
+    cout << "Apellido: " << c.getApellido() << endl;
+    cout << "Obra Social: " << c.getIdObraSocial() << endl;
+    cout << "Domicilio: " << c.getDomicilio() << endl;
+    cout << "Mail: " << c.getMail() << endl;
+    cout << "Telefono: " << c.getTelefono() << endl;
 }

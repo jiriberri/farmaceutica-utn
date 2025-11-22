@@ -6,6 +6,8 @@
 
 using namespace std;
 
+void imprimirOS(const ObraSocial &os);
+
 void ObrasSocialesManager::alta()
 {
     int id;
@@ -122,16 +124,11 @@ void ObrasSocialesManager::mostrar()
         ObraSocial o = os[i];
 
         if(!o.getEliminado()){
-            cout << "Id: " << o.getId() << endl;
-            cout << "Descripcion: " << o.getDescripcion() << endl;
-            cout << "Descuento: " << o.getDescuento() << endl;
-            cout << "Telefono: " << o.getTelefono() << endl;
-            cout << "Mail: " << o.getMail() << endl;
+            imprimirOS(o);
             cout << "==============================================" << endl;
         }
+    }
 
-
-}
     delete[] os;
     system("pause");
 }
@@ -154,18 +151,22 @@ void ObrasSocialesManager::modificar()
     }
 
     ObraSocial OS;
-    OS=archi.leerOS(pos);
+    OS = archi.leerOS(pos);
+
+    if(OS.getEliminado())
+    {
+        cout << "La Obra Social esta dada de baja. Para reactivarla, agreguela nuevamente." << endl;
+        system("pause");
+        return;
+    }
+
     int opcion;
 
     cout << "\n--- Obra Social encontrada ---\n";
     cout << "-----------------------------------------------" << endl;
-    cout << "Id: " << OS.getId() << endl;
-    cout << "Descripcion: " << OS.getDescripcion() << endl;
-    cout << "Descuento: " << OS.getDescuento() << endl;
-    cout << "Telefono: " << OS.getTelefono() << endl;
-    cout << "Mail: " << OS.getMail() << endl;
-    cout << "Eliminado " << OS.getEliminado() << endl;
-    cout << "---------------------------------------------" << endl;
+
+    imprimirOS(OS);
+    cout << "==============================================" << endl;
 
     cout << "1. Modificar descripcion"<<endl;
     cout << "2. Modificar descuento"<<endl;
@@ -257,14 +258,12 @@ void ObrasSocialesManager::baja() {
         return;
     }
     cout << "\n--- Obra Social encontrada ---\n";
-    cout << "ID: " << obj.getId() << endl;
-    cout << "Descripcion: " << obj.getDescripcion() << endl;
-    cout << "Descuento: " << obj.getDescuento() << endl;
-    cout << "Telefono: " << obj.getTelefono() << endl;
-    cout << "Mail: " << obj.getMail() << endl;
-    cout << "-----------------------------" << endl;
+    imprimirOS(obj);
+    cout << "Eliminado: " << (obj.getEliminado() ? "Si" : "No") << endl;
+    cout << "==============================================" << endl;
+
     char opcion;
-    cout << "¿Esta seguro que desea dar de baja la obra social? (S/N): ";
+    cout << "Esta seguro que desea dar de baja la obra social? (S/N): ";
     cin >> opcion;
 
     if (opcion != 'S' && opcion!='s') {
@@ -273,10 +272,18 @@ void ObrasSocialesManager::baja() {
         return;
     }
 
-
     obj.setEliminado(true);
     arc.modificarObraSocial(obj, pos);
 
     cout << "La Obra Social fue dada de baja." << endl;
     system("pause");
+}
+
+void imprimirOS(const ObraSocial& o)
+{
+    cout << "Id: " << o.getId() << endl;
+    cout << "Descripcion: " << o.getDescripcion() << endl;
+    cout << "Descuento: " << o.getDescuento() << "%" << endl;
+    cout << "Telefono: " << o.getTelefono() << endl;
+    cout << "Mail: " << o.getMail() << endl;
 }

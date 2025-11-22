@@ -6,6 +6,8 @@
 
 using namespace std;
 
+void imprimirProducto(const Producto &prod);
+
 void ProductosManager::alta()
 {
     int id, s;
@@ -126,11 +128,7 @@ void ProductosManager::mostrar()
         Producto prod = pr[i];
 
         if(!prod.getEliminado()){
-            cout << "Id: " << prod.getId() << endl;
-            cout << "Descripcion: " << prod.getDescripcion() << endl;
-            cout << "Stock: " << prod.getStock() << endl;
-            cout << "Precio unitario: " << prod.getPrecioUnitario() << endl;
-            cout << "Aplica descuento: " << (prod.getAplicaDescuento() ? "Si" : "No") << endl;
+            imprimirProducto(prod);
             cout << "==============================================" << endl;
         }
     }
@@ -159,17 +157,19 @@ void ProductosManager::modificar()
 
     Producto prod;
     prod = archi.leerPr(pos);
+
+    if (prod.getEliminado()) {
+        cout << "El producto esta dado de baja. Para reactivarlo, agreguelo nuevamente." << endl;
+        system("pause");
+        return;
+    }
+
     int opcion;
 
     cout << "\n--- Producto encontrado ---\n";
-    cout << "-----------------------------------------------" << endl;
-    cout << "ID: " << prod.getId() << endl;
-    cout << "Descripcion: " << prod.getDescripcion() << endl;
-    cout << "Stock: " << prod.getStock() << endl;
-    cout << "Precio unitario: " << prod.getPrecioUnitario() << endl;
-    cout << "Aplica descuento: " << (prod.getAplicaDescuento() ? "Si" : "No") << endl;
-    cout << "Eliminado: " << prod.getEliminado() << endl;
-    cout << "-----------------------------------------------" << endl;
+    cout << "==============================================" << endl;
+    imprimirProducto(prod);
+    cout << "==============================================" << endl;
 
     cout << "1. Modificar descripcion" << endl;
     cout << "2. Modificar stock" << endl;
@@ -256,12 +256,10 @@ void ProductosManager::baja() {
         return;
     }
     cout << "\n--- Producto encontrado ---\n";
-    cout << "ID: " << obj.getId() << endl;
-    cout << "Descripcion: " << obj.getDescripcion() << endl;
-    cout << "Stock: " << obj.getStock() << endl;
-    cout << "Precio unitario: " << obj.getPrecioUnitario() << endl;
-    cout << "Aplica descuento: " << (obj.getAplicaDescuento() ? "Si" : "No") << endl;
-    cout << "-----------------------------" << endl;
+    imprimirProducto(obj);
+    cout << "Eliminado: " << (obj.getEliminado() ? "Si" : "No") << endl;
+    cout << "==============================================" << endl;
+
     char opcion;
     cout << "Esta seguro que desea dar de baja el producto? (S/N): ";
     cin >> opcion;
@@ -277,4 +275,13 @@ void ProductosManager::baja() {
 
     cout << "El producto fue dado de baja." << endl;
     system("pause");
+}
+
+void imprimirProducto(const Producto &prod)
+{
+    cout << "Id: " << prod.getId() << endl;
+    cout << "Descripcion: " << prod.getDescripcion() << endl;
+    cout << "Stock: " << prod.getStock() << endl;
+    cout << "Precio unitario: " << prod.getPrecioUnitario() << endl;
+    cout << "Aplica descuento: " << (prod.getAplicaDescuento() ? "Si" : "No") << endl;
 }
