@@ -216,11 +216,11 @@ void ObrasSocialesManager::modificar()
         break;
     }
     case 0:
-        cout << "Operación cancelada." << endl;
+        cout << "Operacion cancelada." << endl;
         system("pause");
         return;
     default:
-        cout << "Opción inválida." << endl;
+        cout << "Opcion invalida." << endl;
         system("pause");
         return;
     }
