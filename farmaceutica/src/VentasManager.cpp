@@ -10,6 +10,8 @@
 #include "Fecha.h"
 #include "DetalleVenta.h"
 #include "Venta.h"
+#include "ArchivoDetalleVenta.h"
+#include "ArchivoVentas.h"
 
 using namespace std;
 
@@ -25,15 +27,21 @@ void VentasManager::alta()
     long long cuil , cantVenta = 0, idPr, cantxPr;
     char med[20]{};
 
+    ArchivoDetalleVenta archDv("detalleventa.dat");
+    ArchivoVentas archVen("venta.dat");
     ArchivoProductos archPr("productos.dat");
-    
+    ArchivoClientes archCli("clientes.dat");
+
     cout << "Ingrese datos de la venta" << endl;
-    cout << "Venta #" << 1 << endl; //cambiar numero por uno autoincremental
-    
+    int numFactura= archVen.cantidadRegistros()+1; ///Numero de factura autoincrementable
+    cout << "Venta #" << numFactura << endl; //cambiar numero por uno autoincremental
+
     cout << "Cuil Cliente: ";
     cin >> cuil;
     if (!checkCliente(cuil)) return;
-    
+
+
+
     Fecha fecha;
     Fecha obj = fecha.fechaActual();
     cout << "Fecha: " << obj.getDia() << "/" << obj.getMes() << "/" << obj.getAnio() << endl; //tomar fecha actual
@@ -61,6 +69,8 @@ void VentasManager::alta()
             return;
         }
 
+
+
         cout << "Cantidad: ";
         cin >> cantxPr;
         if (!checkStock(cantxPr, idPr)) {
@@ -84,11 +94,14 @@ void VentasManager::alta()
 
         cout << endl;
 
+        detalles[i].setNumFactura(numFactura);
         detalles[i].setIdProducto(idPr);
         detalles[i].setCantidad(cantxPr);
         detalles[i].setPrecio(precio);
         detalles[i].setSubtotal(subtotal);
+        detalles[i].setEliminado(false);
     }
+
 
     if(cantVenta <= 0)
     {
@@ -97,8 +110,47 @@ void VentasManager::alta()
         cout << "Total a pagar: "<< total << endl;
     }
 
-    system("pause");
+
+    char conf;
+    cout << "Confirmar venta? (S/N): ";
+    cin >> conf;
+
+    if(conf != 'S' && conf != 's')
+    {
+        cout << "Venta cancelada. No se guardo nada." << endl;
+        delete[] detalles;
+        system("pause");
+        return;
+    }
+
+
+    /// --- OBTENER ID OBRA SOCIAL ---
+    int posCli = archCli.buscarPorCUIL(cuil);
+    Cliente cli = archCli.leerClientes(posCli);
+    int idObraSocial = cli.getIdObraSocial();
+
+
+
+Venta nuevaVenta(numFactura,cuil,idObraSocial,obj,med,total,false);
+
+archVen.guardarVenta(nuevaVenta);
+
+
+///Gaurdar detalles y restar stock
+  for(int i=0;i<cantVenta;i++){
+        archDv.guardarDetalleVenta(detalles[i]);
+
+    restarStock(detalles[i].getCantidad(),detalles[i].getIdProducto());
 }
+
+cout<<"Venta registrada correctamente."<<endl;
+
+    delete[] detalles;
+    system("pause");
+
+}
+
+
 
 bool checkCliente(long long cuil)
 {
@@ -204,6 +256,8 @@ float obtenerDescuento(long long cuil, int id)
 
     int posCli = archCli.buscarPorCUIL(cuil);
     cli = archCli.leerClientes(posCli);
+
+
 
     int posOb = archOb.buscarPorId(cli.getIdObraSocial());
     obSoc = archOb.leerOS(posOb);

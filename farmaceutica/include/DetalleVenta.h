@@ -12,13 +12,16 @@ private:
     int _idProducto;
     int _cantidad;
     float _precio;
+     float _subtotal;
     bool _eliminado;
+
 
 public:
     DetalleVenta(int numFactura = 0,
                  int idProducto = 0,
                  int cantidad = 0,
                  float precio = 0.0f,
+                 float subtotal=0.0f,
                  bool eliminado = false);
 
     ///Getters
@@ -26,6 +29,7 @@ public:
     int getIdProducto();
     int getCantidad();
     float getPrecio();
+    float getSubtotal();
     bool getEliminado();
 
     ///Setters
@@ -33,6 +37,7 @@ public:
     void setIdProducto(int idProducto);
     void setCantidad(int cantidad);
     void setPrecio(float precio);
+    void setSubtotal(float subtotal);
     void setEliminado(bool eliminado);
 };
 #endif
