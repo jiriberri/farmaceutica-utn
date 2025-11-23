@@ -12,7 +12,7 @@ private:
     int _idProducto;
     int _cantidad;
     float _precio;
-     float _subtotal;
+    float _subtotal;
     bool _eliminado;
 
 

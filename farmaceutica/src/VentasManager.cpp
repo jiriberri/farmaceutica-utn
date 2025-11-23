@@ -33,8 +33,8 @@ void VentasManager::alta()
     ArchivoClientes archCli("clientes.dat");
 
     cout << "Ingrese datos de la venta" << endl;
-    int numFactura= archVen.cantidadRegistros()+1; ///Numero de factura autoincrementable
-    cout << "Venta #" << numFactura << endl; //cambiar numero por uno autoincremental
+    int numFactura= archVen.cantidadRegistros()+1; // Numero de factura autoincrementable
+    cout << "Venta #" << numFactura << endl;
 
     cout << "Cuil Cliente: ";
     cin >> cuil;
@@ -124,89 +124,82 @@ void VentasManager::alta()
     }
 
 
-    /// OBTENER ID OBRA SOCIAL
+    // Obtener idObraSocial
     int posCli = archCli.buscarPorCUIL(cuil);
     Cliente cli = archCli.leerClientes(posCli);
     int idObraSocial = cli.getIdObraSocial();
 
 
 
-Venta nuevaVenta(numFactura,cuil,idObraSocial,obj,med,total,false);
+    Venta nuevaVenta(numFactura,cuil,idObraSocial,obj,med,total,false);
 
-archVen.guardarVenta(nuevaVenta);
+    archVen.guardarVenta(nuevaVenta);
 
 
-///Gaurdar detalles y restar stock
-  for(int i=0;i<cantVenta;i++){
-        archDv.guardarDetalleVenta(detalles[i]);
+    // Gaurdar detalles y restar stock
+    for(int i=0;i<cantVenta;i++){
+            archDv.guardarDetalleVenta(detalles[i]);
 
-    restarStock(detalles[i].getCantidad(),detalles[i].getIdProducto());
-}
+        restarStock(detalles[i].getCantidad(),detalles[i].getIdProducto());
+    }
 
-cout<<"Venta registrada correctamente."<<endl;
+    cout<<"Venta registrada correctamente."<<endl;
 
     delete[] detalles;
     system("pause");
-
 }
 
 
-void VentasManager::mostrar(){
+void VentasManager::mostrar()
+{
+    ArchivoVentas archVen("venta.dat");
+    ArchivoDetalleVenta archDv("detalleventa.dat");
+    ArchivoClientes archcli("Cliente.dat");
 
-ArchivoVentas archVen("venta.dat");
-ArchivoDetalleVenta archDv("detalleventa.dat");
-ArchivoClientes archcli("Cliente.dat");
+    if(!archVen.existe()){
+        cout<<"No hay ventas cargadas."<<endl;
+        system("pause");
+        return;
+    }
 
-if(!archVen.existe()){
+    int totalVentas=archVen.cantidadRegistros();
 
-    cout<<"No hay ventas cargadas."<<endl;
-    system("pause");
-    return;
-}
+    for(int i=0; i<totalVentas;i++){
 
-int totalVentas=archVen.cantidadRegistros();
+        Venta Ven=archVen.leerVenta(i);
 
-for(int i=0; i<totalVentas;i++){
+        cout<<"Factura #"<<Ven.getNumFacturas()<<endl;
+        cout<<"CUIL: "<<Ven.getCuilCliente()<<endl;
 
-    Venta Ven=archVen.leerVenta(i);
+        Fecha f=Ven.getFecha();
 
-    cout<<"Factura #"<<Ven.getNumFacturas()<<endl;
-    cout<<"CUIL: "<<Ven.getCuilCliente()<<endl;
+        cout << "Fecha: " << f.getDia() << "/" << f.getMes() << "/" << f.getAnio() << endl;
 
-    Fecha f=Ven.getFecha();
+        cout<<"Medio Pago: "<< Ven.getMedioDePago()<<endl;
 
-    cout << "Fecha: " << f.getDia() << "/" << f.getMes() << "/" << f.getAnio() << endl;
+        cout <<"Estado: " <<(Ven.getEliminado()?"ANULADA" : "ACTIVA")<<endl;
 
-    cout<<"Medio Pago: "<< Ven.getMedioDePago()<<endl;
+        int totalDv = archDv.Cantidadregistros();
 
-    cout <<"Estado: " <<(Ven.getEliminado()?"ANULADA" : "ACTIVA")<<endl;
+        for(int a=0; a<totalDv;a++){
 
-    int totalDv = archDv.Cantidadregistros();
+            DetalleVenta detV=archDv.leerDetalleVenta(a);
 
-    for(int a=0; a<totalDv;a++){
+            if(detV.getNumFactura()==Ven.getNumFacturas()){
 
-        DetalleVenta detV=archDv.leerDetalleVenta(a);
+                cout << "   - Producto " << detV.getIdProducto()
+                    << " | Cant: " << detV.getCantidad()
+                    << " | Precio: " << detV.getPrecio()
+                    << " | Subtotal: " << detV.getSubtotal()
+                        << endl;
 
-        if(detV.getNumFactura()==Ven.getNumFacturas()){
-
-            cout << "   - Producto " << detV.getIdProducto()
-                 << " | Cant: " << detV.getCantidad()
-                 << " | Precio: " << detV.getPrecio()
-                 << " | Subtotal: " << detV.getSubtotal()
-                     << endl;
-
+            }
         }
 
-      }
+        cout << "------------------------------------------------------------" << endl;
+    }
 
-
-    cout << "------------------------------------------------------------" << endl;
-
-}
-
-system("pause");
-
-
+    system("pause");
 }
 
 

@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-DetalleVenta::DetalleVenta(int nFactura, int idProducto, int cantidad, float precio,float subtotal, bool eliminado)
+DetalleVenta::DetalleVenta(int nFactura, int idProducto, int cantidad, float precio ,float subtotal, bool eliminado)
 {
 
     setNumFactura(nFactura);
@@ -31,5 +31,5 @@ void DetalleVenta::setNumFactura(int numFactura){ _numFactura = numFactura; }
 void DetalleVenta::setIdProducto(int idProducto){ _idProducto = idProducto; }
 void DetalleVenta::setCantidad(int cantidad){ _cantidad = cantidad; }
 void DetalleVenta::setPrecio(float precio){ _precio = precio; }
-void DetalleVenta::setSubtotal(float subtotal){ _subtotal=subtotal;}// agregar setSubtotal y todo lo que conlleva
+void DetalleVenta::setSubtotal(float subtotal){ _subtotal=subtotal;}
 void DetalleVenta::setEliminado(bool eliminado){ _eliminado = eliminado; }
