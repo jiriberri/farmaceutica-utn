@@ -311,7 +311,7 @@ void ClientesManager::baja() {
     }
     cout << "\n--- Cliente encontrado ---\n";
     imprimirCliente(obj);
-    cout << "Eliminado: " << (obj.getEliminado() ? "Sí" : "No") << endl;
+    cout << "Eliminado: " << (obj.getEliminado() ? "Si" : "No") << endl;
     cout << "==============================================" << endl;
 
     char opcion;

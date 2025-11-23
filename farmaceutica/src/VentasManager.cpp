@@ -36,7 +36,7 @@ void VentasManager::alta()
     ArchivoClientes archCli("clientes.dat");
 
     cout << "Ingrese datos de la venta" << endl;
-    int numFactura= archVen.cantidadRegistros()+1; // Numero de factura autoincrementable
+    int numFactura= archVen.cantidadRegistros() + 1;
     cout << "Venta #" << numFactura << endl;
 
     cout << "Cuil Cliente: ";
@@ -152,7 +152,6 @@ void VentasManager::alta()
     system("pause");
 }
 
-
 void VentasManager::mostrar()
 {
     ArchivoVentas archVen("venta.dat");
@@ -166,10 +165,20 @@ void VentasManager::mostrar()
 
     int totalVentas = archVen.cantidadRegistros();
 
+    if (totalVentas <= 0) {
+        cout << "No hay ventas para mostrar." << endl;
+        system("pause");
+        return;
+    }
+
     for(int i=0; i < totalVentas;i++)
     {
         Venta ven = archVen.leerVenta(i);
-        imprimirFactura(ven);
+        if (!ven.getEliminado())
+        {
+            imprimirFactura(ven);
+            cout << "------------------------------------------------------------" << endl << endl;
+        }
     }
 
     system("pause");
@@ -187,6 +196,40 @@ void VentasManager::buscarxId()
 
     if (posVen < 0)
     {
+        cout << "\n Factura no encontrada. \n" << endl;
+        system("pause");
+        return;
+    }
+
+    
+    Venta venta = archVen.leerVenta(posVen);
+    
+    if (venta.getEliminado()) {
+        cout << "\n La factura ya esta dada de baja. \n" << endl;
+        system("pause");
+        return;
+    }
+
+    cout << "\n--- Factura encontrada ---\n";
+    imprimirFactura(venta);
+    cout << "------------------------------------------------------------" << endl << endl;
+
+    system("pause");
+}
+
+void VentasManager::baja()
+{
+    int idBuscado;
+    cout << "Ingrese # de factura a eliminar: ";
+    cin >> idBuscado;
+
+    ArchivoVentas archVen("venta.dat");
+    ArchivoDetalleVenta archDv("detalleventa.dat");
+
+    int posVen = archVen.buscarPorNumFactura(idBuscado);
+
+    if (posVen < 0)
+    {
         cout << "Factura no encontrada." << endl;
         system("pause");
         return;
@@ -194,12 +237,48 @@ void VentasManager::buscarxId()
 
     Venta venta = archVen.leerVenta(posVen);
 
+    if (venta.getEliminado()) {
+        cout << "La factura ya esta dada de baja." << endl;
+        system("pause");
+        return;
+    }
+
     cout << "\n--- Factura encontrada ---\n";
     imprimirFactura(venta);
+    cout << "Eliminado: " << (venta.getEliminado() ? "Si" : "No") << endl;
+    cout << "------------------------------------------------------------" << endl << endl;
 
+    char opcion;
+    cout << "Esta seguro que desea dar de baja esta venta? (S/N): ";
+    cin >> opcion;
+
+    if (opcion != 'S' && opcion!='s') {
+        cout << "\nOperacion cancelada.\n" << endl;
+        system("pause");
+        return;
+    }
+
+    // Marca cabecera como eliminada
+    venta.setEliminado(true);
+    archVen.modificarVenta(venta, posVen);
+
+    // Marca detalles como eliminados
+    int totalDv = archDv.Cantidadregistros();
+
+    for(int i = 0; i < totalDv; i++)
+    {
+        DetalleVenta det = archDv.leerDetalleVenta(i);
+
+        if(det.getNumFactura() == idBuscado)
+        {
+            det.setEliminado(true);
+            archDv.modificarDetalleVenta(det, i);
+        }
+    }
+
+    cout << "\n Venta y detalles dados de baja correctamente. \n" << endl;
     system("pause");
 }
-
 
 bool checkCliente(long long cuil)
 {
@@ -371,5 +450,4 @@ void imprimirFactura(const Venta &venta)
     }
 
     cout << "Total factura: " << venta.getImporte() << endl;
-    cout << "------------------------------------------------------------" << endl << endl;
 }

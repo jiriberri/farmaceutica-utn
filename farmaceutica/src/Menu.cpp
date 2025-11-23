@@ -248,6 +248,9 @@ void Menu::menuVentas()
             limpiarPantalla();
             mgr.buscarxId();
             break;
+        case 4:
+            limpiarPantalla();
+            mgr.baja();
         case 0:
             break;
         default:

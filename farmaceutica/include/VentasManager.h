@@ -9,6 +9,7 @@ class VentasManager
         void alta();
         void mostrar();
         void buscarxId();
+        void baja();
 
 
 };
