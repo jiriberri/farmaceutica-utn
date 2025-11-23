@@ -244,7 +244,6 @@ void Menu::menuVentas()
             limpiarPantalla();
             mgr.mostrar();
             break;
-
         case 0:
             break;
         default:

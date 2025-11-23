@@ -21,6 +21,7 @@ bool checkStock(int, int);
 bool restarStock(int, int);
 float obtenerPrecio(int);
 float obtenerDescuento(long long, int);
+void mostrarDescripcionProducto(int);
 
 void VentasManager::alta()
 {
@@ -154,7 +155,7 @@ void VentasManager::mostrar()
 {
     ArchivoVentas archVen("venta.dat");
     ArchivoDetalleVenta archDv("detalleventa.dat");
-    ArchivoClientes archcli("Cliente.dat");
+    ArchivoClientes archcli("cliente.dat");
 
     if(!archVen.existe()){
         cout<<"No hay ventas cargadas."<<endl;
@@ -187,11 +188,13 @@ void VentasManager::mostrar()
 
             if(detV.getNumFactura()==Ven.getNumFacturas()){
 
-                cout << "   - Producto " << detV.getIdProducto()
+                cout << "   - Producto ";
+                mostrarDescripcionProducto(detV.getIdProducto());
+                cout << " (ID: " << detV.getIdProducto() << ")"
                     << " | Cant: " << detV.getCantidad()
                     << " | Precio: " << detV.getPrecio()
                     << " | Subtotal: " << detV.getSubtotal()
-                        << endl;
+                    << endl;
 
             }
         }
@@ -328,4 +331,13 @@ float obtenerDescuento(long long cuil, int id)
     float porcFinal = 1.0f - (porc / 100.0f); // 1 - 0.10 = 0.9
 
     return porcFinal;
+}
+
+void mostrarDescripcionProducto(int idProd)
+{
+    ArchivoProductos arch("productos.dat");
+    int pos = arch.buscarPorId(idProd);
+
+    Producto p = arch.leerPr(pos);
+    cout << p.getDescripcion();
 }
