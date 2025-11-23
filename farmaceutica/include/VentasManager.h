@@ -7,6 +7,9 @@ class VentasManager
     private:
     public:
         void alta();
+        void mostrar();
+
+
 };
 
 #endif // VENTASMANAGER_H

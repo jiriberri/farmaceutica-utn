@@ -124,7 +124,7 @@ void VentasManager::alta()
     }
 
 
-    /// --- OBTENER ID OBRA SOCIAL ---
+    /// OBTENER ID OBRA SOCIAL
     int posCli = archCli.buscarPorCUIL(cuil);
     Cliente cli = archCli.leerClientes(posCli);
     int idObraSocial = cli.getIdObraSocial();
@@ -149,6 +149,75 @@ cout<<"Venta registrada correctamente."<<endl;
     system("pause");
 
 }
+
+
+void VentasManager::mostrar(){
+
+ArchivoVentas archVen("venta.dat");
+ArchivoDetalleVenta archDv("detalleventa.dat");
+ArchivoClientes archcli("Cliente.dat");
+
+if(!archVen.existe()){
+
+    cout<<"No hay ventas cargadas."<<endl;
+    system("pause");
+    return;
+}
+
+int totalVentas=archVen.cantidadRegistros();
+
+for(int i=0; i<totalVentas;i++){
+
+    Venta Ven=archVen.leerVenta(i);
+
+    cout<<"Factura #"<<Ven.getNumFacturas()<<endl;
+    cout<<"CUIL: "<<Ven.getCuilCliente()<<endl;
+
+    Fecha f=Ven.getFecha();
+
+    cout << "Fecha: " << f.getDia() << "/" << f.getMes() << "/" << f.getAnio() << endl;
+
+    cout<<"Medio Pago: "<< Ven.getMedioDePago()<<endl;
+
+    cout <<"Estado: " <<(Ven.getEliminado()?"ANULADA" : "ACTIVA")<<endl;
+
+    int totalDv = archDv.Cantidadregistros();
+
+    for(int a=0; a<totalDv;a++){
+
+        DetalleVenta detV=archDv.leerDetalleVenta(a);
+
+        if(detV.getNumFactura()==Ven.getNumFacturas()){
+
+            cout << "   - Producto " << detV.getIdProducto()
+                 << " | Cant: " << detV.getCantidad()
+                 << " | Precio: " << detV.getPrecio()
+                 << " | Subtotal: " << detV.getSubtotal()
+                     << endl;
+
+        }
+
+      }
+
+
+    cout << "------------------------------------------------------------" << endl;
+
+}
+
+system("pause");
+
+
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

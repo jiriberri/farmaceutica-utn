@@ -240,6 +240,11 @@ void Menu::menuVentas()
             limpiarPantalla();
             mgr.alta();
             break;
+        case 2:
+            limpiarPantalla();
+            mgr.mostrar();
+            break;
+
         case 0:
             break;
         default:
