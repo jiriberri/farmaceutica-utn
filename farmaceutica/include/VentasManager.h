@@ -8,6 +8,7 @@ class VentasManager
     public:
         void alta();
         void mostrar();
+        void buscarxId();
 
 
 };

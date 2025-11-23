@@ -22,6 +22,8 @@ bool restarStock(int, int);
 float obtenerPrecio(int);
 float obtenerDescuento(long long, int);
 void mostrarDescripcionProducto(int);
+void imprimirFactura(const Venta &venta);
+void mostrarNombreCliente(int);
 
 void VentasManager::alta()
 {
@@ -154,8 +156,7 @@ void VentasManager::alta()
 void VentasManager::mostrar()
 {
     ArchivoVentas archVen("venta.dat");
-    ArchivoDetalleVenta archDv("detalleventa.dat");
-    ArchivoClientes archcli("cliente.dat");
+
 
     if(!archVen.existe()){
         cout<<"No hay ventas cargadas."<<endl;
@@ -163,58 +164,41 @@ void VentasManager::mostrar()
         return;
     }
 
-    int totalVentas=archVen.cantidadRegistros();
+    int totalVentas = archVen.cantidadRegistros();
 
-    for(int i=0; i<totalVentas;i++){
-
-        Venta Ven=archVen.leerVenta(i);
-
-        cout<<"Factura #"<<Ven.getNumFacturas()<<endl;
-        cout<<"CUIL: "<<Ven.getCuilCliente()<<endl;
-
-        Fecha f=Ven.getFecha();
-
-        cout << "Fecha: " << f.getDia() << "/" << f.getMes() << "/" << f.getAnio() << endl;
-
-        cout<<"Medio Pago: "<< Ven.getMedioDePago()<<endl;
-
-        cout <<"Estado: " <<(Ven.getEliminado()?"ANULADA" : "ACTIVA")<<endl;
-
-        int totalDv = archDv.Cantidadregistros();
-
-        for(int a=0; a<totalDv;a++){
-
-            DetalleVenta detV=archDv.leerDetalleVenta(a);
-
-            if(detV.getNumFactura()==Ven.getNumFacturas()){
-
-                cout << "   - Producto ";
-                mostrarDescripcionProducto(detV.getIdProducto());
-                cout << " (ID: " << detV.getIdProducto() << ")"
-                    << " | Cant: " << detV.getCantidad()
-                    << " | Precio: " << detV.getPrecio()
-                    << " | Subtotal: " << detV.getSubtotal()
-                    << endl;
-
-            }
-        }
-
-        cout << "------------------------------------------------------------" << endl;
+    for(int i=0; i < totalVentas;i++)
+    {
+        Venta ven = archVen.leerVenta(i);
+        imprimirFactura(ven);
     }
 
     system("pause");
 }
 
+void VentasManager::buscarxId()
+{
+    int idBuscado;
+    cout << "Ingrese # de factura a buscar: ";
+    cin >> idBuscado;
 
+    ArchivoVentas archVen("venta.dat");
 
+    int posVen = archVen.buscarPorNumFactura(idBuscado);
 
+    if (posVen < 0)
+    {
+        cout << "Factura no encontrada." << endl;
+        system("pause");
+        return;
+    }
 
+    Venta venta = archVen.leerVenta(posVen);
 
+    cout << "\n--- Factura encontrada ---\n";
+    imprimirFactura(venta);
 
-
-
-
-
+    system("pause");
+}
 
 
 bool checkCliente(long long cuil)
@@ -340,4 +324,52 @@ void mostrarDescripcionProducto(int idProd)
 
     Producto p = arch.leerPr(pos);
     cout << p.getDescripcion();
+}
+
+void mostrarNombreCliente(int cuil){
+    ArchivoClientes arch("clientes.dat");
+    int pos = arch.buscarPorCUIL(cuil);
+
+    Cliente c = arch.leerClientes(pos);
+    cout << c.getNombre() << endl;
+}
+
+void imprimirFactura(const Venta &venta)
+{
+    ArchivoDetalleVenta archDv("detalleventa.dat");
+
+    cout << "Factura #" << venta.getNumFacturas() << endl;
+    cout << "CUIL: " << venta.getCuilCliente() << endl;
+
+    cout << "Nombre: ";
+    mostrarNombreCliente(venta.getCuilCliente());
+
+    Fecha f = venta.getFecha();
+    cout << "Fecha: " << f.getDia() << "/" << f.getMes() << "/" << f.getAnio() << endl;
+
+    cout << "Medio Pago: " << venta.getMedioDePago() << endl;
+    cout << "Estado: " << (venta.getEliminado() ? "ANULADA" : "ACTIVA") << endl << endl;
+
+    cout << "Detalles:" << endl;
+
+    int totalDv = archDv.Cantidadregistros();
+
+    for (int i = 0; i < totalDv; i++)
+    {
+        DetalleVenta detV = archDv.leerDetalleVenta(i);
+
+        if (detV.getNumFactura() == venta.getNumFacturas())
+        {
+            cout << "   - Producto ";
+            mostrarDescripcionProducto(detV.getIdProducto());
+            cout << " (ID: " << detV.getIdProducto() << ")"
+                 << " | Cant: " << detV.getCantidad()
+                 << " | Precio: " << detV.getPrecio()
+                 << " | Subtotal: " << detV.getSubtotal()
+                 << endl;
+        }
+    }
+
+    cout << "Total factura: " << venta.getImporte() << endl;
+    cout << "------------------------------------------------------------" << endl << endl;
 }
