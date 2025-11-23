@@ -173,7 +173,7 @@ void ObrasSocialesManager::modificar()
     cout << "3. Modificar telefono"<<endl;
     cout << "4. Modificar mail"<<endl;
     cout << "0. Cancelar"<<endl;
-    cout << "Seleccione una opcion: "<<endl;
+    cout << "Seleccione una opcion: ";
     cin >> opcion;
     cout << endl;
 

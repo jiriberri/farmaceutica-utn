@@ -263,7 +263,7 @@ void VentasManager::baja()
     archVen.modificarVenta(venta, posVen);
 
     // Marca detalles como eliminados
-    int totalDv = archDv.Cantidadregistros();
+    int totalDv = archDv.cantidadRegistros();
 
     for(int i = 0; i < totalDv; i++)
     {
@@ -431,7 +431,7 @@ void imprimirFactura(const Venta &venta)
 
     cout << "Detalles:" << endl;
 
-    int totalDv = archDv.Cantidadregistros();
+    int totalDv = archDv.cantidadRegistros();
 
     for (int i = 0; i < totalDv; i++)
     {

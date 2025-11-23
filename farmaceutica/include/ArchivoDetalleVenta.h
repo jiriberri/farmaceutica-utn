@@ -14,7 +14,7 @@ public:
     ArchivoDetalleVenta(std::string nombreArchivo);
 
     bool guardarDetalleVenta(DetalleVenta reg);
-    int Cantidadregistros();
+    int cantidadRegistros();
     DetalleVenta leerDetalleVenta(int pos);
     bool modificarDetalleVenta(DetalleVenta obj, int pos);
     int buscarPorNumFactura(int numFactura);

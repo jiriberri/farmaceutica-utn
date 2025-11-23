@@ -9,7 +9,7 @@ ArchivoClientes::ArchivoClientes(std::string nombreArchivo)
 
 bool ArchivoClientes::guardarCliente(Cliente reg)
 {
-    FILE* p = fopen(_nombreArchivo.c_str(), "ab"); // abrir en modo append
+    FILE* p = fopen(_nombreArchivo.c_str(), "ab");
     if (p == NULL)
     {
 
@@ -17,7 +17,7 @@ bool ArchivoClientes::guardarCliente(Cliente reg)
         return 0;
     }
 
-    fwrite(&reg, sizeof(Cliente), 1, p); // escribe el cliente
+    fwrite(&reg, sizeof(Cliente), 1, p);
     fclose(p);
 
     return true;
@@ -54,8 +54,8 @@ Cliente ArchivoClientes::leerClientes(int pos)
 
     Cliente c;
 
-    fseek(p, sizeof(Cliente) * pos, SEEK_SET);  // mueve puntero a la posición
-    fread(&c, sizeof(Cliente), 1, p);           // lee el cliente
+    fseek(p, sizeof(Cliente) * pos, SEEK_SET);
+    fread(&c, sizeof(Cliente), 1, p);
     fclose(p);
 
 
@@ -79,18 +79,18 @@ bool ArchivoClientes::modificarCliente(Cliente obj, int pos)
 
 int ArchivoClientes::buscarPorCUIL(long long cuilBuscado)
 {
-    int total = cantidadRegistros();  // obtenemos cuántos clientes hay en el archivo
+    int total = cantidadRegistros();
 
     for (int i = 0; i < total; i++)
     {
-        Cliente c = leerClientes(i);   // leemos el cliente en la posición i
+        Cliente c = leerClientes(i);
         if (c.getCuil() == cuilBuscado)
         {
-            return i;                 // devolvemos la posición si coincide
+            return i;
         }
     }
 
-    return -1;  // no se encontró
+    return -1;
 }
 
 bool ArchivoClientes::existe() const {

@@ -11,9 +11,6 @@ class ArchivoVentas {
 private:
     std::string _nombreArchivo;
 
-
-
-
 public:
     ArchivoVentas(std::string nombreArchivo);
 

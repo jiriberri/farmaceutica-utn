@@ -22,7 +22,7 @@ bool ArchivoDetalleVenta::guardarDetalleVenta(DetalleVenta reg)
     return true;
 }
 
-int ArchivoDetalleVenta::Cantidadregistros()
+int ArchivoDetalleVenta::cantidadRegistros()
 {
     FILE* p= fopen(_nombreArchivo.c_str(),"rb");
 
@@ -76,7 +76,7 @@ bool ArchivoDetalleVenta::modificarDetalleVenta(DetalleVenta obj, int pos)
 
 int ArchivoDetalleVenta::buscarPorNumFactura(int numFactura)
 {
-    int total = Cantidadregistros();
+    int total = cantidadRegistros();
 
     for (int i = 0; i < total; i++)
     {

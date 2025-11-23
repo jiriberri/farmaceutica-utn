@@ -75,7 +75,6 @@ void ClientesManager::alta()
 
         Cliente c(cuil, nom, ape, ob, dom, mail, tel, false);
 
-        // Esta es la funcion de la clase ArchivoClientes
         ArchivoClientes archi("clientes.dat");
 
         if(archi.guardarCliente(c))
@@ -108,15 +107,12 @@ void ClientesManager::mostrar()
         return;
     }
 
-    // Reservar memoria
     Cliente* clientes = new Cliente[cantReg];
 
-    // Leer todos los clientes
     for (int i = 0; i < cantReg; i++) {
         clientes[i] = archi.leerClientes(i);
     }
 
-    // Ordenar por CUIL
     for (int i = 0; i < cantReg - 1; i++) {
         for (int j = 0; j < cantReg - i - 1; j++) {
             if (clientes[j].getCuil() > clientes[j + 1].getCuil()) {
@@ -255,7 +251,6 @@ void ClientesManager::modificar()
         cout << "Ingrese el nuevo ID de la obra social: ";
         cin >> nuevoIdObra;
 
-        // Validar si existe esa obra social
         ArchivoObrasSociales archOS("obrassociales.dat");
         int posOS = archOS.buscarPorId(nuevoIdObra);
 

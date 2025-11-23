@@ -10,7 +10,7 @@ ArchivoVentas::ArchivoVentas(std::string nombreArchivo){
 
 bool ArchivoVentas::guardarVenta(Venta reg)
 {
-    FILE* p = fopen(_nombreArchivo.c_str(), "ab"); // abrir en modo append
+    FILE* p = fopen(_nombreArchivo.c_str(), "ab");
     if (p == NULL)
     {
 
@@ -18,7 +18,7 @@ bool ArchivoVentas::guardarVenta(Venta reg)
         return 0;
     }
 
-    fwrite(&reg, sizeof(Venta), 1, p); // escribe el cliente
+    fwrite(&reg, sizeof(Venta), 1, p);
     fclose(p);
 
     return true;
@@ -55,8 +55,8 @@ if(p==nullptr){
 
 Venta ven;
 
- fseek(p, sizeof(Venta) * pos, SEEK_SET);  // mueve puntero a la posición
-    fread(&ven, sizeof(Venta), 1, p);           // lee el cliente
+ fseek(p, sizeof(Venta) * pos, SEEK_SET);
+    fread(&ven, sizeof(Venta), 1, p);
     fclose(p);
 
  return ven;

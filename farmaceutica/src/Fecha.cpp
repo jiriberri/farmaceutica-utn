@@ -20,23 +20,23 @@ void Fecha::cargar() {
 
         // Validacion de rangos
         if (_anio < 1) {
-            cout << "Año inválido.\n";
+            cout << "Anio invalido.\n";
             continue;
         }
         if (_mes < 1 || _mes > 12) {
-            cout << "Mes inválido (1-12).\n";
+            cout << "Mes invalido (1-12).\n";
             continue;
         }
 
-        // Días maximos por mes
+        // Dias maximos por mes
         int diasMes[] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 
-        // Ajuste por año bisiesto
+        // Ajuste por anio bisiesto
         bool bisiesto = (_anio % 4 == 0 && (_anio % 100 != 0 || _anio % 400 == 0));
         if (bisiesto && _mes == 2) diasMes[1] = 29;
 
         if (_dia < 1 || _dia > diasMes[_mes - 1]) {
-            cout << "Dia inválido para el mes ingresado.\n";
+            cout << "Dia invalido para el mes ingresado.\n";
             continue;
         }
         valido = true;
