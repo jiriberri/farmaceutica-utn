@@ -12,10 +12,12 @@
 #include "Venta.h"
 #include "ArchivoDetalleVenta.h"
 #include "ArchivoVentas.h"
-
+#include "ArchivoVendedor.h"
+#include "Vendedor.h"
 using namespace std;
 
 bool checkCliente(long long);
+bool checkVendedor(long long);
 bool checkProducto(int);
 bool checkStock(int, int);
 bool restarStock(int, int);
@@ -24,24 +26,33 @@ float obtenerDescuento(long long, int);
 void mostrarDescripcionProducto(int);
 void imprimirFactura(const Venta &venta);
 void mostrarNombreCliente(int);
+void mostrarNombreVendedor(int);
+
 
 void VentasManager::alta()
 {
-    long long cuil , cantVenta = 0, idPr, cantxPr;
+    long long cuil, idVendedor , cantVenta = 0, idPr, cantxPr;
     char med[20]{};
 
     ArchivoDetalleVenta archDv("detalleventa.dat");
     ArchivoVentas archVen("venta.dat");
     ArchivoProductos archPr("productos.dat");
     ArchivoClientes archCli("clientes.dat");
+    ArchivoVendedor archVendedor("Vendedores.dat");
 
     cout << "Ingrese datos de la venta" << endl;
     int numFactura= archVen.cantidadRegistros() + 1;
     cout << "Venta #" << numFactura << endl;
 
+
+    cout << "ID Vendedor: ";
+    cin >> idVendedor;
+    if (!checkVendedor(idVendedor)) return;
+
     cout << "Cuil Cliente: ";
     cin >> cuil;
     if (!checkCliente(cuil)) return;
+
 
 
 
@@ -134,7 +145,7 @@ void VentasManager::alta()
 
 
 
-    Venta nuevaVenta(numFactura,cuil,idObraSocial,obj,med,total,false);
+   Venta nuevaVenta(numFactura, cuil, idVendedor, idObraSocial, obj, med, total, false);
 
     archVen.guardarVenta(nuevaVenta);
 
@@ -201,9 +212,9 @@ void VentasManager::buscarxId()
         return;
     }
 
-    
+
     Venta venta = archVen.leerVenta(posVen);
-    
+
     if (venta.getEliminado()) {
         cout << "\n La factura ya esta dada de baja. \n" << endl;
         system("pause");
@@ -292,6 +303,19 @@ bool checkCliente(long long cuil)
     }
     return true;
 }
+
+bool checkVendedor(long long ID){
+ArchivoVendedor arch("Vendedores.dat");
+if (arch.buscarPorID(ID)==-1){
+
+    cout<<"ID de vendedor no encontrado"<<endl;
+    system("pause");
+    return false;
+}
+return true;
+}
+
+
 
 bool checkProducto(int id)
 {
@@ -405,6 +429,15 @@ void mostrarDescripcionProducto(int idProd)
     cout << p.getDescripcion();
 }
 
+void mostrarNombreVendedor(int idVendedor){
+    ArchivoVendedor arch("Vendedores.dat");
+    int pos = arch.buscarPorID(idVendedor);
+
+    Vendedor v = arch.leerVendedor(pos);
+    cout << v.getNombre() << endl;
+}
+
+
 void mostrarNombreCliente(int cuil){
     ArchivoClientes arch("clientes.dat");
     int pos = arch.buscarPorCUIL(cuil);
@@ -418,6 +451,10 @@ void imprimirFactura(const Venta &venta)
     ArchivoDetalleVenta archDv("detalleventa.dat");
 
     cout << "Factura #" << venta.getNumFacturas() << endl;
+    cout<<"Vendedor: "<<venta.getIdVendedor()<<endl;
+
+    cout<<"Nombre Vendedor: ";mostrarNombreVendedor(venta.getIdVendedor());
+
     cout << "CUIL: " << venta.getCuilCliente() << endl;
 
     cout << "Nombre: ";

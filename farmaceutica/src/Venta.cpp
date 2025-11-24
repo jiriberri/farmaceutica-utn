@@ -2,15 +2,17 @@
 #include <cstring>
 
 Venta::Venta(int numFactura,
-            long long cuilCliente,
-            int idObraSocial,
-            Fecha fecha,
-            const char* medioPago,
-            float importe,
-            bool eliminado)
+             long long cuilCliente,
+             long long IdVendedor,
+             int idObraSocial,
+             Fecha fecha,
+             const char* medioPago,
+             float importe,
+             bool eliminado)
 {
     setNumFacturas(numFactura);
     setCuilCliente(cuilCliente);
+    setIdVendedor(IdVendedor);
     setIdObraSocial(idObraSocial);
     setFecha(fecha);
     setMedioDePago(medioPago);
@@ -21,6 +23,7 @@ Venta::Venta(int numFactura,
 
 int Venta::getNumFacturas() const { return _numFactura; }
 long long Venta::getCuilCliente() const { return _cuilCliente; }
+long long Venta::getIdVendedor() const{return _IdVendedor;}
 int Venta::getIdObraSocial() const { return _idObraSocial; }
 Fecha Venta::getFecha() const { return _fecha; }
 const char* Venta::getMedioDePago() const { return _medioPago; }
@@ -30,6 +33,7 @@ bool Venta::getEliminado() const { return _eliminado; }
 
 void Venta::setNumFacturas(int num) { _numFactura = num; }
 void Venta::setCuilCliente(long long cuil) { _cuilCliente = cuil; }
+void Venta::setIdVendedor(long long idVendedor){_IdVendedor=idVendedor;}
 void Venta::setIdObraSocial(int id) { _idObraSocial = id; }
 void Venta::setFecha(const Fecha& f) { _fecha = f; }
 void Venta::setMedioDePago(const char* medio)

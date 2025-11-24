@@ -12,11 +12,12 @@ private:
     char _medioPago[20];
     float _importe;
     bool _eliminado;
-
+    long long _IdVendedor;
 public:
 
     Venta(int numFactura = 0,
           long long cuilCliente = 0,
+          long long IdVendedor=0,
           int idObraSocial=0,
           Fecha fecha = Fecha(),
           const char* medioPago = "",
@@ -26,6 +27,7 @@ public:
     // Getters
     int getNumFacturas() const;
     long long getCuilCliente() const;
+    long long getIdVendedor() const;
     int getIdObraSocial() const;
     Fecha getFecha() const;
     const char* getMedioDePago() const;
@@ -35,6 +37,7 @@ public:
     // Setters
     void setNumFacturas(int num);
     void setCuilCliente(long long cuil);
+    void setIdVendedor(long long idVendedor);
     void setIdObraSocial(int id);
     void setFecha(const Fecha& f);
     void setMedioDePago(const char* medio);

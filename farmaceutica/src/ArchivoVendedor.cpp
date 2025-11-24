@@ -48,7 +48,7 @@ Vendedor ArchivoVendedor::leerVendedor(int pos)
         return Vendedor();
     }
 
-    Vendedor v; // ahora es válido gracias a los valores por defecto
+    Vendedor v;
 
     fseek(p, pos * sizeof v, SEEK_SET);
     fread(&v, sizeof v, 1, p);
