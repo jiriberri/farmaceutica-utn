@@ -38,6 +38,7 @@
 		<Unit filename="include/ArchivoDetalleVenta.h" />
 		<Unit filename="include/ArchivoObrasSociales.h" />
 		<Unit filename="include/ArchivoProductos.h" />
+		<Unit filename="include/ArchivoVendedor.h" />
 		<Unit filename="include/ArchivoVentas.h" />
 		<Unit filename="include/Cliente.h" />
 		<Unit filename="include/ClientesManager.h" />
@@ -50,6 +51,7 @@
 		<Unit filename="include/Producto.h" />
 		<Unit filename="include/ProductosManager.h" />
 		<Unit filename="include/Vendedor.h" />
+		<Unit filename="include/VendedorManager.h" />
 		<Unit filename="include/Venta.h" />
 		<Unit filename="include/VentasManager.h" />
 		<Unit filename="main.cpp" />
@@ -57,6 +59,7 @@
 		<Unit filename="src/ArchivoDetalleVenta.cpp" />
 		<Unit filename="src/ArchivoObrasSociales.cpp" />
 		<Unit filename="src/ArchivoProductos.cpp" />
+		<Unit filename="src/ArchivoVendedor.cpp" />
 		<Unit filename="src/ArchivoVentas.cpp" />
 		<Unit filename="src/Cliente.cpp" />
 		<Unit filename="src/ClientesManager.cpp" />
@@ -68,6 +71,8 @@
 		<Unit filename="src/Persona.cpp" />
 		<Unit filename="src/Producto.cpp" />
 		<Unit filename="src/ProductosManager.cpp" />
+		<Unit filename="src/Vendedor.cpp" />
+		<Unit filename="src/VendedorManager.cpp" />
 		<Unit filename="src/Venta.cpp" />
 		<Unit filename="src/VentasManager.cpp" />
 		<Extensions>

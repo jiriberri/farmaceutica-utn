@@ -10,7 +10,7 @@ public:
     void menuOS();
     void menuProductos();
     void menuVentas();
-
+    void menuVendedores();
 private:
 };
 

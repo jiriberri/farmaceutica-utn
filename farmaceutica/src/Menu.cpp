@@ -4,6 +4,7 @@
 #include "ObrasSocialesManager.h"
 #include "ProductosManager.h"
 #include "VentasManager.h"
+#include "VendedorManager.h"
 #include <iostream>
 using namespace std;
 
@@ -21,8 +22,9 @@ void Menu::menuPrincipal()
         cout << "--- Menu Principal ---" << endl;
         cout << "1. Clientes" << endl;
         cout << "2. Obras Sociales" << endl;
-        cout << "3. Productos" << endl;
-        cout << "4. Ventas" << endl;
+        cout << "3. Vendedores"<<endl;
+        cout << "4. Productos" << endl;
+        cout << "5. Ventas" << endl;
 
         cout << "0. Salir" << endl;
         cout << "Seleccione una opcion: ";
@@ -38,11 +40,13 @@ void Menu::menuPrincipal()
             menuOS();
             break;
         case 3:
-            menuProductos();
+            menuVendedores();
             break;
         case 4:
-            menuVentas();
+            menuProductos();
             break;
+        case 5:
+            menuVentas();
         case 0:
             cout << "Saliendo del programa..." << endl;
             break;
@@ -251,6 +255,7 @@ void Menu::menuVentas()
         case 4:
             limpiarPantalla();
             mgr.baja();
+            break;
         case 0:
             break;
         default:
@@ -261,6 +266,77 @@ void Menu::menuVentas()
     }
     while(opcion != 0);
 }
+
+void Menu::menuVendedores(){
+
+int opcion;
+
+    do
+    {
+        limpiarPantalla();
+
+
+cout << "--- Menú Vendedores ---" << endl;
+
+        cout << "1. Cargar Vendedores" << endl;
+        cout << "2. Listar Vendedores"<< endl;
+        cout << "3. Buscar Vendedor por ID"<<endl;
+        cout << "4. Modificar Vendedor"<<endl;
+        cout <<"5. Baja Vendedor"<<endl;
+        cout << "0. Atras" << endl;
+        cout << "Seleccione una opcion: ";
+        cin >> opcion;
+        cout << endl;
+
+        VendedorManager mgr;
+
+        switch (opcion)
+        {
+        case 1:
+            limpiarPantalla();
+            mgr.alta();
+            break;
+        case 2:
+            limpiarPantalla();
+            mgr.mostrar();
+            break;
+        case 3:
+            limpiarPantalla();
+            mgr.mostrarxID();
+            break;
+
+        case 4:
+            limpiarPantalla();
+            mgr.modificar();
+            break;
+        case 5:
+            limpiarPantalla();
+            mgr.baja();
+            break;
+        case 0:
+            break;
+        default:
+            cout << "Opcion invalida. Intente de nuevo." << endl << endl;
+            system("pause");
+            cout << endl;
+        }
+
+
+    }
+
+while(opcion != 0);
+}
+
+
+
+
+
+
+
+
+
+
+
 
 void limpiarPantalla()
 {
