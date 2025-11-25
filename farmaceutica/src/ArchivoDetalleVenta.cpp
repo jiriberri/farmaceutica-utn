@@ -28,7 +28,6 @@ int ArchivoDetalleVenta::cantidadRegistros()
 
     if(p == NULL)
     {
-        cout << "Error, archivo no encontrado" << endl;
         return 0;
     }
 

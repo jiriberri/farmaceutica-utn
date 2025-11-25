@@ -25,24 +25,21 @@ bool ArchivoVentas::guardarVenta(Venta reg)
 }
 
 
-int ArchivoVentas::cantidadRegistros(){
+int ArchivoVentas::cantidadRegistros()
+{
+    FILE *p =fopen (_nombreArchivo.c_str(),"rb");
 
-FILE *p =fopen (_nombreArchivo.c_str(),"rb");
+    if(p==NULL)
+    {
+        return 0;
+    }
+    fseek(p,0,SEEK_END);
 
-if(p==NULL){
+    int cantidad= ftell(p)/sizeof(Venta);
 
-    cout<<"Error,archivo no encontrado"<<endl;
-    return 0;
+    fclose(p);
 
-}
-fseek(p,0,SEEK_END);
-
-int cantidad= ftell(p)/sizeof(Venta);
-
-fclose(p);
-
-return cantidad;
-
+    return cantidad;
 }
 
 Venta ArchivoVentas::leerVenta(int pos){

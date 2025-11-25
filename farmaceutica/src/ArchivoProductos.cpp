@@ -27,7 +27,6 @@ int ArchivoProductos::cantidadRegistros()
     FILE* p= fopen(_nombreArchivo.c_str(),"rb");
 
     if (p == NULL) {
-        cout << "Error, archivo no encontrado 2." << endl;
         return 0;
     }
 
