@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 OPR/123.0.0.0" version="29.1.1">
   <diagram name="Página-1" id="yslVblOs-Mrpqko0nez6">
-    <mxGraphModel dx="1620" dy="791" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="2314" dy="1130" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -323,7 +323,7 @@
         <mxCell id="2BxSYm27pG8JP7SP8s3I-9" parent="2BxSYm27pG8JP7SP8s3I-2" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="mostrarxID();" vertex="1">
           <mxGeometry height="30" width="160" y="120" as="geometry" />
         </mxCell>
-        <mxCell id="2BxSYm27pG8JP7SP8s3I-7" parent="2BxSYm27pG8JP7SP8s3I-2" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="buscarxId();" vertex="1">
+        <mxCell id="2BxSYm27pG8JP7SP8s3I-7" parent="2BxSYm27pG8JP7SP8s3I-2" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="modificar();" vertex="1">
           <mxGeometry height="30" width="160" y="150" as="geometry" />
         </mxCell>
         <mxCell id="2BxSYm27pG8JP7SP8s3I-8" parent="2BxSYm27pG8JP7SP8s3I-2" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="baja();" vertex="1">
@@ -343,7 +343,7 @@
         <mxCell id="2BxSYm27pG8JP7SP8s3I-13" parent="2BxSYm27pG8JP7SP8s3I-10" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="ArchivoVendedor(string nombreArchivo)" vertex="1">
           <mxGeometry height="30" width="260" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="2BxSYm27pG8JP7SP8s3I-14" parent="2BxSYm27pG8JP7SP8s3I-10" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="guardarVendedor(Producto reg) bool" vertex="1">
+        <mxCell id="2BxSYm27pG8JP7SP8s3I-14" parent="2BxSYm27pG8JP7SP8s3I-10" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="guardarVendedor(Vendedor reg) bool" vertex="1">
           <mxGeometry height="30" width="260" y="90" as="geometry" />
         </mxCell>
         <mxCell id="2BxSYm27pG8JP7SP8s3I-15" parent="2BxSYm27pG8JP7SP8s3I-10" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="cantidadRegistros() int&amp;nbsp; &amp;nbsp;&amp;nbsp;" vertex="1">
@@ -355,7 +355,7 @@
         <mxCell id="2BxSYm27pG8JP7SP8s3I-17" parent="2BxSYm27pG8JP7SP8s3I-10" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="modificarVendedor(Vendedor, int pos) bool" vertex="1">
           <mxGeometry height="30" width="260" y="180" as="geometry" />
         </mxCell>
-        <mxCell id="2BxSYm27pG8JP7SP8s3I-18" parent="2BxSYm27pG8JP7SP8s3I-10" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="buscarPorId(int id) int" vertex="1">
+        <mxCell id="2BxSYm27pG8JP7SP8s3I-18" parent="2BxSYm27pG8JP7SP8s3I-10" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="buscarPorId(long long IDSolicitado) int" vertex="1">
           <mxGeometry height="30" width="260" y="210" as="geometry" />
         </mxCell>
         <mxCell id="2BxSYm27pG8JP7SP8s3I-19" parent="2BxSYm27pG8JP7SP8s3I-10" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="existe() bool" vertex="1">

@@ -13,6 +13,7 @@ Cliente::Cliente(long long c, const char* n, const char* a,
 long long Cliente::getCuil() const
 {
     return _cuil;
+
 }
 int Cliente::getIdObraSocial() const
 {
