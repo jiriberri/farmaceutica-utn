@@ -295,24 +295,50 @@ bool checkCliente(long long cuil)
 {
     ArchivoClientes arch("clientes.dat");
 
-    if (arch.buscarPorCUIL(cuil) == -1)
+    int pos = arch.buscarPorCUIL(cuil);
+
+    if (pos == -1)
     {
         cout << "Cuil no encontrado" << endl;
         system("pause");
         return false;
     }
+
+    Cliente cli = arch.leerClientes(pos);
+
+    if (cli.getEliminado() == true)
+    {
+        cout << "El cliente con el CUIL ingresado se encuentra eliminado" << endl;
+        system("pause");
+        return false;
+    }
+
     return true;
 }
 
-bool checkVendedor(long long ID){
-ArchivoVendedor arch("Vendedores.dat");
-if (arch.buscarPorID(ID)==-1){
+bool checkVendedor(long long id)
+{
+    ArchivoVendedor arch("Vendedores.dat");
 
-    cout<<"ID de vendedor no encontrado"<<endl;
-    system("pause");
-    return false;
-}
-return true;
+    int pos = arch.buscarPorID(id);
+
+    if (pos == -1){
+
+        cout<<"ID de vendedor no encontrado"<<endl;
+        system("pause");
+        return false;
+    }
+
+    Vendedor vend = arch.leerVendedor(pos);
+
+    if (vend.getEliminado() == true)
+    {
+        cout << "El vendedor con el ID ingresado se encuentra eliminado" << endl;
+        system("pause");
+        return false;
+    }
+
+    return true;
 }
 
 
