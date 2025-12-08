@@ -44,7 +44,6 @@ void VentasManager::alta()
     int numFactura= archVen.cantidadRegistros() + 1;
     cout << "Venta #" << numFactura << endl;
 
-
     cout << "ID Vendedor: ";
     cin >> idVendedor;
     if (!checkVendedor(idVendedor)) return;
@@ -52,9 +51,6 @@ void VentasManager::alta()
     cout << "Cuil Cliente: ";
     cin >> cuil;
     if (!checkCliente(cuil)) return;
-
-
-
 
     Fecha fecha;
     Fecha obj = fecha.fechaActual();
@@ -64,66 +60,83 @@ void VentasManager::alta()
     cout << "Medio de pago: ";
     cin.getline(med, sizeof(med));
 
-    cout << "Cantidad de productos diferentes a vender: ";
-    cin >> cantVenta;
-
     cout << endl;
 
-    DetalleVenta* detalles = new DetalleVenta[cantVenta];
-
+    DetalleVenta* detalles = nullptr;
     float total = 0;
+    char opc = 'S';
 
-    for(int i = 0; i < cantVenta ; i++) {
-        cout << "Item #" << i+1 << endl;
+    while (opc == 'S' || opc == 's')
+    {
+        cout << "Item #" << cantVenta + 1 << endl;
 
         cout << "idProducto: ";
         cin >> idPr;
         if (!checkProducto(idPr)) {
-            delete[] detalles;
-            return;
+            cout << "Producto invalido. No se agrego." << endl << endl;
         }
-
-
-
-        cout << "Cantidad: ";
-        cin >> cantxPr;
-        if (!checkStock(cantxPr, idPr)) {
-            delete[] detalles;
-            return;
-        }
-
-        float precio = obtenerPrecio(idPr);
-        cout << "Precio individual: " << precio << endl;
-
-        float desc = obtenerDescuento(cuil, idPr);
-        if(desc != 1.0f)
+        else
         {
-            cout << "Descuento: " << (1.0f - desc) * 100 << "%" << endl;
+            cout << "Cantidad: ";
+            cin >> cantxPr;
+            if (!checkStock(cantxPr, idPr)) {
+                cout << "No hay stock suficiente. No se agrego." << endl << endl;
+            }
+            else
+            {
+                float precio = obtenerPrecio(idPr);
+                cout << "Precio individual: " << precio << endl;
+
+                float desc = obtenerDescuento(cuil, idPr);
+                if(desc != 1.0f)
+                {
+                    cout << "Descuento: " << (1.0f - desc) * 100 << "%" << endl;
+                }
+
+                float subtotal = precio * cantxPr * desc;
+                cout << "Subtotal: " << subtotal << endl << endl;
+
+                total += subtotal;
+
+
+                DetalleVenta dv;
+                dv.setNumFactura(numFactura);
+                dv.setIdProducto(idPr);
+                dv.setCantidad(cantxPr);
+                dv.setPrecio(precio);
+                dv.setSubtotal(subtotal);
+                dv.setEliminado(false);
+
+
+                DetalleVenta* aux = new DetalleVenta[cantVenta + 1];
+
+                for (int i = 0; i < cantVenta; i++) {
+                    aux[i] = detalles[i];
+                }
+
+                aux[cantVenta] = dv;
+
+                delete[] detalles;
+                detalles = aux;
+                cantVenta++;
+            }
         }
 
-        float subtotal = precio * cantxPr * desc;
-        cout << "Subtotal: " << subtotal << endl;
-
-        total += subtotal;
-
+        cout << "¿Agregar otro producto? (S/N): ";
+        cin >> opc;
         cout << endl;
-
-        detalles[i].setNumFactura(numFactura);
-        detalles[i].setIdProducto(idPr);
-        detalles[i].setCantidad(cantxPr);
-        detalles[i].setPrecio(precio);
-        detalles[i].setSubtotal(subtotal);
-        detalles[i].setEliminado(false);
     }
 
-
+    // si no se cargó ningún producto, no tiene sentido seguir
     if(cantVenta <= 0)
     {
-        cout << "No hay productos a cargar." << endl;
-    } else {
-        cout << "Total a pagar: "<< total << endl;
+        cout << "No hay productos a cargar. Venta cancelada." << endl;
+        delete[] detalles;
+        system("pause");
+        return;
     }
 
+    cout << "Total a pagar: "<< total << endl;
 
     char conf;
     cout << "Confirmar venta? (S/N): ";
@@ -137,24 +150,18 @@ void VentasManager::alta()
         return;
     }
 
-
     // Obtener idObraSocial
     int posCli = archCli.buscarPorCUIL(cuil);
     Cliente cli = archCli.leerClientes(posCli);
     int idObraSocial = cli.getIdObraSocial();
 
-
-
-   Venta nuevaVenta(numFactura, cuil, idVendedor, idObraSocial, obj, med, total, false);
-
+    Venta nuevaVenta(numFactura, cuil, idVendedor, idObraSocial, obj, med, total, false);
     archVen.guardarVenta(nuevaVenta);
 
-
-    // Gaurdar detalles y restar stock
-    for(int i=0;i<cantVenta;i++){
-            archDv.guardarDetalleVenta(detalles[i]);
-
-        restarStock(detalles[i].getCantidad(),detalles[i].getIdProducto());
+    // Guardar detalles y restar stock
+    for(int i = 0; i < cantVenta; i++){
+        archDv.guardarDetalleVenta(detalles[i]);
+        restarStock(detalles[i].getCantidad(), detalles[i].getIdProducto());
     }
 
     cout<<"Venta registrada correctamente."<<endl;

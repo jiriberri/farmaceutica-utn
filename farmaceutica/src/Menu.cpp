@@ -19,15 +19,18 @@ void Menu::menuPrincipal()
     {
         limpiarPantalla();
 
-        cout << "--- Menu Principal ---" << endl;
-        cout << "1. Clientes" << endl;
-        cout << "2. Obras Sociales" << endl;
-        cout << "3. Vendedores"<<endl;
-        cout << "4. Productos" << endl;
-        cout << "5. Ventas" << endl;
-
-        cout << "0. Salir" << endl;
-        cout << "Seleccione una opcion: ";
+cout << "+--------------------------+" << endl;
+cout << "|      MENU PRINCIPAL      |" << endl;
+cout << "+--------------------------+" << endl;
+cout << "| 1. Clientes              |" << endl;
+cout << "| 2. Obras Sociales        |" << endl;
+cout << "| 3. Vendedores            |" << endl;
+cout << "| 4. Productos             |" << endl;
+cout << "| 5. Ventas                |" << endl;
+cout << "+--------------------------+" << endl;
+cout << "| 0. Salir                 |" << endl;
+cout << "+--------------------------+" << endl;
+cout << "Seleccione una opcion: ";
         cin >> opcion;
         cout << endl;
 
@@ -66,15 +69,18 @@ void Menu::menuClientes()
     do
     {
         limpiarPantalla();
+        cout << "+----------------------------+" << endl;
+        cout << "|    --- Menu Clientes ---   |" << endl;
+        cout << "+----------------------------+" << endl;
+        cout << "|[1]. Cargar cliente         |" << endl;
+        cout << "|[2]. Listar Clientes        |"<< endl;
+        cout << "|[3]. Buscar Cliente por CUIL|"<<endl;
+        cout << "|[4]. Modificar Cliente      |"<<endl;
+         cout <<"|[5]. Baja Cliente           |"<<endl;
+         cout <<"+----------------------------+" << endl;
+        cout << "|[0]. Atras                  |" << endl;
+         cout <<"+----------------------------+" << endl;
 
-        cout << "--- Menu Clientes ---" << endl;
-
-        cout << "1. Cargar cliente" << endl;
-        cout << "2. Listar Clientes"<< endl;
-        cout << "3. Buscar Cliente por CUIL"<<endl;
-        cout << "4. Modificar Cliente"<<endl;
-        cout <<"5. Baja Cliente"<<endl;
-        cout << "0. Atras" << endl;
         cout << "Seleccione una opcion: ";
         cin >> opcion;
         cout << endl;
@@ -122,15 +128,16 @@ void Menu::menuOS()
     do
     {
         limpiarPantalla();
-
-        cout << "--- Menu Obras Sociales ---" << endl;
-
-        cout << "1. Cargar Obra Social" << endl;
-        cout << "2. Listar Obras Sociales" << endl;
-        cout << "3. Modificar Obra Social" << endl;
-        cout << "4. Baja Obra Social" << endl;
-
-        cout << "0. Atras" << endl;
+        cout << "+------------------------------+" << endl;
+        cout << "|  --- Menu Obras Sociales --- |" << endl;
+        cout << "+------------------------------+" << endl;
+        cout << "|1). Cargar Obra Social        |" << endl;
+        cout << "|2). Listar Obras Sociales     |" << endl;
+        cout << "|3). Modificar Obra Social     |" << endl;
+        cout << "|4). Baja Obra Social          |" << endl;
+        cout << "+------------------------------+" << endl;
+        cout << "|0). Atras                     |" << endl;
+        cout << "+------------------------------+" << endl;
         cout << "Seleccione una opcion: ";
         cin >> opcion;
         cout << endl;
@@ -174,14 +181,15 @@ void Menu::menuProductos()
     {
         limpiarPantalla();
 
-        cout << "--- Menu Productos ---" << endl;
-
-        cout << "1. Cargar Producto" << endl;
-        cout << "2. Listar Productos"<< endl;
-        cout << "3. Modificar Producto" << endl;
-        cout << "4. Eliminar Producto" << endl;
-
-        cout << "0. Atras" << endl;
+        cout << "--- [Menu Productos] ---" << endl;
+        cout << "---------------------------" << endl;
+        cout << "1). Cargar Producto" << endl;
+        cout << "2). Listar Productos"<< endl;
+        cout << "3). Modificar Producto" << endl;
+        cout << "4). Eliminar Producto" << endl;
+        cout << "---------------------------" << endl;
+        cout << "0). [Atras]" << endl;
+        cout << "---------------------------" << endl;
         cout << "Seleccione una opcion: ";
         cin >> opcion;
         cout << endl;
@@ -224,14 +232,17 @@ void Menu::menuVentas()
     {
         limpiarPantalla();
 
-        cout << "--- Menu Ventas ---" << endl;
+         cout <<" +--------------------------------+" << endl;
+        cout << " |      --- Menu Ventas ---       |" << endl;
+          cout<<" +--------------------------------+" << endl;
+        cout << " |1. Nueva venta                  |" << endl;
+        cout << " |2. Listar ventas                |"<< endl;
+        cout << " |3. Buscar por numero de factura |" << endl;
+        cout << " |4. Eliminar venta               |" << endl;
+        cout << " +--------------------------------+" << endl;
+        cout << " |0. Atras                        |" << endl;
+        cout << " +--------------------------------+" << endl;
 
-        cout << "1. Nueva venta" << endl;
-        cout << "2. Listar ventas"<< endl;
-        cout << "3. Buscar por numero de factura" << endl;
-        cout << "4. Eliminar venta" << endl;
-
-        cout << "0. Atras" << endl;
         cout << "Seleccione una opcion: ";
         cin >> opcion;
         cout << endl;
@@ -276,14 +287,16 @@ int opcion;
         limpiarPantalla();
 
 
-cout << "--- Menú Vendedores ---" << endl;
-
-        cout << "1. Cargar Vendedores" << endl;
-        cout << "2. Listar Vendedores"<< endl;
-        cout << "3. Buscar Vendedor por ID"<<endl;
-        cout << "4. Modificar Vendedor"<<endl;
-        cout <<"5. Baja Vendedor"<<endl;
-        cout << "0. Atras" << endl;
+cout << "--- [Menú Vendedores] ---" << endl;
+ cout << "---------------------------" << endl;
+        cout << "1). Cargar Vendedores" << endl;
+        cout << "2). Listar Vendedores"<< endl;
+        cout << "3). Buscar Vendedor por ID"<<endl;
+        cout << "4). Modificar Vendedor"<<endl;
+        cout <<"5). Baja Vendedor"<<endl;
+        cout << "---------------------------" << endl;
+        cout << "0). [Atras]" << endl;
+        cout << "---------------------------" << endl;
         cout << "Seleccione una opcion: ";
         cin >> opcion;
         cout << endl;
