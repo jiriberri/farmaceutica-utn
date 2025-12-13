@@ -73,12 +73,18 @@ void VentasManager::alta()
         cout << "idProducto: ";
         cin >> idPr;
         if (!checkProducto(idPr)) {
-            cout << "Producto invalido. No se agrego." << endl << endl;
+            cout << "Producto invalido." << endl;
         }
         else
         {
             cout << "Cantidad: ";
             cin >> cantxPr;
+
+            while (cantxPr <= 0){
+            cout << "Cantidad invalida. Ingrese un numero mayor a 0: ";
+            cin >> cantxPr;
+            }
+
             if (!checkStock(cantxPr, idPr)) {
                 cout << "No hay stock suficiente. No se agrego." << endl << endl;
             }
@@ -127,7 +133,7 @@ void VentasManager::alta()
         cout << endl;
     }
 
-    // si no se cargó ningún producto, no tiene sentido seguir
+
     if(cantVenta <= 0)
     {
         cout << "No hay productos a cargar. Venta cancelada." << endl;
