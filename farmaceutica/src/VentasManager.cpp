@@ -72,9 +72,7 @@ void VentasManager::alta()
 
         cout << "idProducto: ";
         cin >> idPr;
-        if (!checkProducto(idPr)) {
-            cout << "Producto invalido." << endl;
-        }
+        if (!checkProducto(idPr));
         else
         {
             cout << "Cantidad: ";
@@ -85,13 +83,11 @@ void VentasManager::alta()
             cin >> cantxPr;
             }
 
-            if (!checkStock(cantxPr, idPr)) {
-                cout << "No hay stock suficiente. No se agrego." << endl << endl;
-            }
+            if (!checkStock(cantxPr, idPr));
             else
             {
                 float precio = obtenerPrecio(idPr);
-                cout << "Precio individual: " << precio << endl;
+                cout << "Precio individual: $" << precio << endl;
 
                 float desc = obtenerDescuento(cuil, idPr);
                 if(desc != 1.0f)
@@ -100,7 +96,7 @@ void VentasManager::alta()
                 }
 
                 float subtotal = precio * cantxPr * desc;
-                cout << "Subtotal: " << subtotal << endl << endl;
+                cout << "Subtotal: $" << subtotal << endl << endl;
 
                 total += subtotal;
 
@@ -128,7 +124,7 @@ void VentasManager::alta()
             }
         }
 
-        cout << "¿Agregar otro producto? (S/N): ";
+        cout << "Agregar otro producto? (S/N): ";
         cin >> opc;
         cout << endl;
     }
@@ -142,11 +138,12 @@ void VentasManager::alta()
         return;
     }
 
-    cout << "Total a pagar: "<< total << endl;
+    cout << "Total a pagar: $"<< total << endl << endl;
 
     char conf;
     cout << "Confirmar venta? (S/N): ";
     cin >> conf;
+    cout << endl;
 
     if(conf != 'S' && conf != 's')
     {
@@ -229,7 +226,7 @@ void VentasManager::buscarxId()
     Venta venta = archVen.leerVenta(posVen);
 
     if (venta.getEliminado()) {
-        cout << "\n La factura ya esta dada de baja. \n" << endl;
+        cout << "\nLa factura ya esta dada de baja. \n" << endl;
         system("pause");
         return;
     }
@@ -300,7 +297,7 @@ void VentasManager::baja()
         }
     }
 
-    cout << "\n Venta y detalles dados de baja correctamente. \n" << endl;
+    cout << "\nVenta y detalles dados de baja correctamente. \n" << endl;
     system("pause");
 }
 
@@ -360,10 +357,21 @@ bool checkProducto(int id)
 {
     ArchivoProductos arch("productos.dat");
 
-    if (arch.buscarPorId(id) == -1)
+    int pos = arch.buscarPorId(id);
+
+    if (pos == -1)
     {
         cout << "Id no encontrado" << endl;
         system("pause");
+        cout << endl;
+        return false;
+    }
+
+    Producto prod = arch.leerPr(pos);
+
+    if (prod.getEliminado() == true)
+    {
+        cout << "El producto con el ID ingresado se encuentra eliminado\n" << endl;
         return false;
     }
     return true;
@@ -386,6 +394,7 @@ bool checkStock(int cantxPr, int id)
         cout << "La cantidad a vender supera el stock actual" << endl;
         cout << "Stock actual: " << stock << endl;
         system("pause");
+        cout << endl;
         return false;
     }
     else return true;
@@ -519,11 +528,11 @@ void imprimirFactura(const Venta &venta)
             mostrarDescripcionProducto(detV.getIdProducto());
             cout << " (ID: " << detV.getIdProducto() << ")"
                  << " | Cant: " << detV.getCantidad()
-                 << " | Precio: " << detV.getPrecio()
-                 << " | Subtotal: " << detV.getSubtotal()
+                 << " | Precio: $" << detV.getPrecio()
+                 << " | Subtotal: $" << detV.getSubtotal()
                  << endl;
         }
     }
 
-    cout << "Total factura: " << venta.getImporte() << endl;
+    cout << "Total factura: $" << venta.getImporte() << endl;
 }

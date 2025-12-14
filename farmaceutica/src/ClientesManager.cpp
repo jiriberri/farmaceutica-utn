@@ -8,6 +8,7 @@
 using namespace std;
 
 void imprimirCliente(const Cliente &c);
+int checkOS(int id);
 
 void ClientesManager::alta()
 {
@@ -62,6 +63,10 @@ void ClientesManager::alta()
         cout << "ID de Obra Social: ";
         cin >> ob;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        
+        // chequea que la OS exista
+        int idOS = checkOS(ob);
+        if(idOS == -1) return;
 
         cout << "Domicilio: ";
         cin.getline(dom, sizeof(dom));
@@ -158,7 +163,7 @@ void ClientesManager::mostrarxCUIL()
     Cliente c = archi.leerClientes(pos);
 
     if (c.getEliminado()) {
-        cout << "El cliente con ese CUIL esta dado de baja." << endl;
+        cout << "\nEl cliente con ese CUIL esta dado de baja." << endl;
         system("pause");
         return;
     }
@@ -192,7 +197,7 @@ void ClientesManager::modificar()
     c=archi.leerClientes(pos);
 
     if (c.getEliminado()) {
-        cout << "El cliente esta dado de baja. Para reactivarlo, agreguelo nuevamente." << endl;
+        cout << "\nEl cliente esta dado de baja. Para reactivarlo, agreguelo nuevamente." << endl;
         system("pause");
         return;
     }
@@ -251,17 +256,10 @@ void ClientesManager::modificar()
         cout << "Ingrese el nuevo ID de la obra social: ";
         cin >> nuevoIdObra;
 
-        ArchivoObrasSociales archOS("obrassociales.dat");
-        int posOS = archOS.buscarPorId(nuevoIdObra);
-
-        if(posOS < 0)
-        {
-            cout << "La obra social con ese ID no existe." << endl;
-            system("pause");
-            return;
-        }
-
-        c.setIdObraSocial(nuevoIdObra);
+        int idOS = checkOS(nuevoIdObra);
+        if(idOS == -1) return;
+        
+        c.setIdObraSocial(idOS);
         break;
     }
     case 0:
@@ -300,7 +298,7 @@ void ClientesManager::baja() {
     Cliente obj = arc.leerClientes(pos);
 
     if (obj.getEliminado()) {
-        cout << "El cliente ya esta dado de baja." << endl;
+        cout << "\nEl cliente ya esta dado de baja." << endl;
         system("pause");
         return;
     }
@@ -310,7 +308,7 @@ void ClientesManager::baja() {
     cout << "==============================================" << endl;
 
     char opcion;
-    cout << "Esta seguro que desea dar de baja este cliente? (S/N): ";
+    cout << "\nEsta seguro que desea dar de baja este cliente? (S/N): ";
     cin >> opcion;
 
     if (opcion != 'S' && opcion!='s') {
@@ -323,7 +321,7 @@ void ClientesManager::baja() {
     obj.setEliminado(true);
     arc.modificarCliente(obj, pos);
 
-    cout << "Cliente dado de baja correctamente." << endl;
+    cout << "\nCliente dado de baja correctamente." << endl;
     system("pause");
 }
 
@@ -335,4 +333,20 @@ void imprimirCliente(const Cliente &c){
     cout << "Domicilio: " << c.getDomicilio() << endl;
     cout << "Mail: " << c.getMail() << endl;
     cout << "Telefono: " << c.getTelefono() << endl;
+}
+
+int checkOS(int id)
+{
+    ArchivoObrasSociales archOS("obrassociales.dat");
+    int posOS = archOS.buscarPorId(id);
+
+    if(posOS < 0)
+    {
+        cout << endl;
+        cout << "La obra social con ese ID no existe." << endl;
+        system("pause");
+        return -1;
+    }
+
+    return id;
 }

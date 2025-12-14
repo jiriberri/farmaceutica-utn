@@ -155,7 +155,7 @@ void ObrasSocialesManager::modificar()
 
     if(OS.getEliminado())
     {
-        cout << "La Obra Social esta dada de baja. Para reactivarla, agreguela nuevamente." << endl;
+        cout << "\nLa Obra Social esta dada de baja. Para reactivarla, agreguela nuevamente." << endl;
         system("pause");
         return;
     }
@@ -253,7 +253,7 @@ void ObrasSocialesManager::baja() {
     ObraSocial obj = arc.leerOS(pos);
 
     if (obj.getEliminado()) {
-        cout << "La obra social ya esta dado de baja." << endl;
+        cout << "\nLa obra social ya esta dada de baja." << endl;
         system("pause");
         return;
     }
@@ -263,7 +263,7 @@ void ObrasSocialesManager::baja() {
     cout << "==============================================" << endl;
 
     char opcion;
-    cout << "Esta seguro que desea dar de baja la obra social? (S/N): ";
+    cout << "\nEsta seguro que desea dar de baja la obra social? (S/N): ";
     cin >> opcion;
 
     if (opcion != 'S' && opcion!='s') {
@@ -275,7 +275,7 @@ void ObrasSocialesManager::baja() {
     obj.setEliminado(true);
     arc.modificarObraSocial(obj, pos);
 
-    cout << "La Obra Social fue dada de baja." << endl;
+    cout << "\nLa Obra Social fue dada de baja." << endl;
     system("pause");
 }
 

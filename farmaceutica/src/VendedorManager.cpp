@@ -56,7 +56,7 @@ void VendedorManager::alta() {
     cout << "Apellido: ";
     cin.getline(ape, sizeof(ape));
 
-    cout << "Sueldo: ";
+    cout << "Sueldo: $";
     cin >> Sueldo;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -150,7 +150,7 @@ void VendedorManager::mostrarxID()
     Vendedor v = archi.leerVendedor(pos);
 
     if (v.getEliminado()) {
-        cout << "El Vendedor con ese ID esta dado de baja." << endl;
+        cout << "\nEl Vendedor con ese ID esta dado de baja." << endl;
         system("pause");
         return;
     }
@@ -186,7 +186,7 @@ void VendedorManager::modificar()
 
     if (v.getEliminado())
     {
-        cout << "El Vendedor esta dado de baja. Para reactivarlo, agreguelo nuevamente." << endl;
+        cout << "\nEl Vendedor esta dado de baja. Para reactivarlo, agreguelo nuevamente." << endl;
         system("pause");
         return;
     }
@@ -288,7 +288,7 @@ void VendedorManager::baja() {
     Vendedor obj = archi.leerVendedor(pos);
 
     if (obj.getEliminado()) {
-        cout << "El Vendedor ya esta dado de baja." << endl;
+        cout << "\nEl Vendedor ya esta dado de baja." << endl;
         system("pause");
         return;
     }
@@ -298,7 +298,7 @@ void VendedorManager::baja() {
     cout << "==============================================" << endl;
 
     char opcion;
-    cout << "Esta seguro que desea dar de baja este Vendedor? (S/N): ";
+    cout << "\nEsta seguro que desea dar de baja este Vendedor? (S/N): ";
     cin >> opcion;
 
     if (opcion != 'S' && opcion!='s') {
@@ -311,7 +311,7 @@ void VendedorManager::baja() {
     obj.setEliminado(true);
     archi.modificarVendedor(obj, pos);
 
-    cout << "Vendedor dado de baja correctamente." << endl;
+    cout << "\nVendedor dado de baja correctamente." << endl;
     system("pause");
 }
 
@@ -328,7 +328,7 @@ void imprimirVendedor(const Vendedor &v){
     cout << "ID: " << v.getId() << endl;
     cout << "Nombre: " << v.getNombre() << endl;
     cout << "Apellido: " << v.getApellido() << endl;
-    cout << "Sueldo: " << v.getSueldo() << endl;
+    cout << "Sueldo: $" << v.getSueldo() << endl;
     cout << "Domicilio: " << v.getDomicilio() << endl;
     cout << "Mail: " << v.getMail() << endl;
     cout << "Telefono: " << v.getTelefono() << endl;

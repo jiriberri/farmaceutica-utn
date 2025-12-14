@@ -128,16 +128,16 @@ void Menu::menuOS()
     do
     {
         limpiarPantalla();
-        cout << "+------------------------------+" << endl;
-        cout << "|  --- Menu Obras Sociales --- |" << endl;
-        cout << "+------------------------------+" << endl;
-        cout << "|1). Cargar Obra Social        |" << endl;
-        cout << "|2). Listar Obras Sociales     |" << endl;
-        cout << "|3). Modificar Obra Social     |" << endl;
-        cout << "|4). Baja Obra Social          |" << endl;
-        cout << "+------------------------------+" << endl;
-        cout << "|0). Atras                     |" << endl;
-        cout << "+------------------------------+" << endl;
+        cout << "+-------------------------------+" << endl;
+        cout << "|  --- Menu Obras Sociales ---  |" << endl;
+        cout << "+-------------------------------+" << endl;
+        cout << "| 1). Cargar Obra Social        |" << endl;
+        cout << "| 2). Listar Obras Sociales     |" << endl;
+        cout << "| 3). Modificar Obra Social     |" << endl;
+        cout << "| 4). Baja Obra Social          |" << endl;
+        cout << "+-------------------------------+" << endl;
+        cout << "| 0). Atras                     |" << endl;
+        cout << "+-------------------------------+" << endl;
         cout << "Seleccione una opcion: ";
         cin >> opcion;
         cout << endl;
@@ -232,16 +232,16 @@ void Menu::menuVentas()
     {
         limpiarPantalla();
 
-         cout <<" +--------------------------------+" << endl;
-        cout << " |      --- Menu Ventas ---       |" << endl;
-          cout<<" +--------------------------------+" << endl;
-        cout << " |1. Nueva venta                  |" << endl;
-        cout << " |2. Listar ventas                |"<< endl;
-        cout << " |3. Buscar por numero de factura |" << endl;
-        cout << " |4. Eliminar venta               |" << endl;
-        cout << " +--------------------------------+" << endl;
-        cout << " |0. Atras                        |" << endl;
-        cout << " +--------------------------------+" << endl;
+         cout <<"+---------------------------------+" << endl;
+        cout << "|       --- Menu Ventas ---       |" << endl;
+          cout<<"+---------------------------------+" << endl;
+        cout << "|(1) Nueva venta                  |" << endl;
+        cout << "|(2) Listar ventas                |"<< endl;
+        cout << "|(3) Buscar por numero de factura |" << endl;
+        cout << "|(4) Eliminar venta               |" << endl;
+        cout << "+---------------------------------+" << endl;
+        cout << "|(0) Atras                        |" << endl;
+        cout << "+---------------------------------+" << endl;
 
         cout << "Seleccione una opcion: ";
         cin >> opcion;
@@ -287,8 +287,8 @@ int opcion;
         limpiarPantalla();
 
 
-cout << "--- [Menú Vendedores] ---" << endl;
- cout << "---------------------------" << endl;
+        cout << "--- [Menu Vendedores] ---" << endl;
+        cout << "---------------------------" << endl;
         cout << "1). Cargar Vendedores" << endl;
         cout << "2). Listar Vendedores"<< endl;
         cout << "3). Buscar Vendedor por ID"<<endl;

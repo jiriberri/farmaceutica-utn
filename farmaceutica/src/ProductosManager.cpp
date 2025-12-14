@@ -63,7 +63,7 @@ void ProductosManager::alta()
         cin >> s;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        cout << "Precio Unitario: ";
+        cout << "Precio Unitario: $";
         cin >> p;
 
         cout << "Aplica descuento? (S/N): ";
@@ -159,7 +159,7 @@ void ProductosManager::modificar()
     prod = archi.leerPr(pos);
 
     if (prod.getEliminado()) {
-        cout << "El producto esta dado de baja. Para reactivarlo, agreguelo nuevamente." << endl;
+        cout << "\nEl producto esta dado de baja. Para reactivarlo, agreguelo nuevamente." << endl;
         system("pause");
         return;
     }
@@ -251,7 +251,7 @@ void ProductosManager::baja() {
     Producto obj = arc.leerPr(pos);
 
     if (obj.getEliminado()) {
-        cout << "El producto ya esta dado de baja." << endl;
+        cout << "\nEl producto ya esta dado de baja." << endl;
         system("pause");
         return;
     }
@@ -261,7 +261,7 @@ void ProductosManager::baja() {
     cout << "==============================================" << endl;
 
     char opcion;
-    cout << "Esta seguro que desea dar de baja el producto? (S/N): ";
+    cout << "\nEsta seguro que desea dar de baja el producto? (S/N): ";
     cin >> opcion;
 
     if (opcion != 'S' && opcion!='s') {
@@ -273,7 +273,7 @@ void ProductosManager::baja() {
     obj.setEliminado(true);
     arc.modificarPr(obj, pos);
 
-    cout << "El producto fue dado de baja." << endl;
+    cout << "\nEl producto fue dado de baja." << endl;
     system("pause");
 }
 
@@ -282,6 +282,6 @@ void imprimirProducto(const Producto &prod)
     cout << "Id: " << prod.getId() << endl;
     cout << "Descripcion: " << prod.getDescripcion() << endl;
     cout << "Stock: " << prod.getStock() << endl;
-    cout << "Precio unitario: " << prod.getPrecioUnitario() << endl;
+    cout << "Precio unitario: $" << prod.getPrecioUnitario() << endl;
     cout << "Aplica descuento: " << (prod.getAplicaDescuento() ? "Si" : "No") << endl;
 }
